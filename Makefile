@@ -17,5 +17,5 @@ start_ws_daemon:
 target: start_ws_daemon server
 
 run:
-	make -j2 target
+	make -i -j2 target
 
