@@ -49,8 +49,8 @@ class ControlSend:
                             'timestamp': timestemp_,
                             'bet_status':result_dict['status']}
             print(result_dict_)
-            server_result = ServerResult.objects.create(**result_dict_)
-            server_result.save()
+            # server_result = ServerResult.objects.create(**result_dict_)
+            # server_result.save()
             
         elif result_dict["status"] == "rolling" and self.updated_at != result_dict["updated_at"]:
             self.updated_at = result_dict["updated_at"]
@@ -87,24 +87,10 @@ class ControlSend:
             print("$$$$$$$",self.acumulativo_banca ,"$$$$$$$$$$")
               
             try:
-                server_result = ServerResult.objects.get(ID_bet=result_dict_['ID_bet'])
-                server_result.bet_color = result_dict_['bet_color']
-                server_result.bet_roll = result_dict_['bet_roll']
-                server_result.bet_status = result_dict_['bet_status']
-                server_result.total_red_eur_bet = result_dict_['total_red_eur_bet']
-                server_result.total_red_bets_placed = result_dict_['total_red_bets_placed']
-                server_result.total_white_eur_bet = result_dict_['total_white_eur_bet']
-                server_result.total_white_bets_placed = result_dict_['total_white_bets_placed']
-                server_result.total_black_eur_bet = result_dict_['total_black_eur_bet']
-                server_result.total_black_bets_placed = result_dict_['total_black_bets_placed']
-                server_result.total_eur_bet = result_dict_['total_eur_bet']
-                server_result.total_bets_placed = result_dict_['total_bets_placed']
-                server_result.total_retention_eur = result_dict_['total_retention_eur']
-         
-                server_result.save()
-            except ServerResult.DoesNotExist:
                 server_result = ServerResult.objects.create(**result_dict_)
                 server_result.save()
+         
+            except ServerResult.DoesNotExist:
                 print("objeto nao encontrado erro na comunicação com o server")            
 
 
