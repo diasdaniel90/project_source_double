@@ -10,6 +10,16 @@ class ServerResultType(graphene.ObjectType):
     bet_color = graphene.Int()
     bet_roll = graphene.Int()
     datetime = graphene.DateTime()
+    total_red_eur_bet = graphene.Int()
+    total_red_bets_placed = graphene.Int()
+    total_white_eur_bet = graphene.Int()
+    total_white_bets_placed = graphene.Int()
+    total_black_eur_bet = graphene.Int()
+    total_black_bets_placed = graphene.Int()
+    total_bets_placed = graphene.Int()
+    total_eur_bet = graphene.Int()
+    total_retention_eur = graphene.Int()
+    
     
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)     

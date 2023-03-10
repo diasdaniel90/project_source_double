@@ -9,8 +9,12 @@ class ServerResult(models.Model):
     bet_status = models.CharField(max_length=25, null=False, blank=False)
     bet_color = models.IntegerField(null=True)
     bet_roll = models.IntegerField(null=True)
-    
-
-    
-    
-    
+    total_red_eur_bet = models.IntegerField(null=True)
+    total_red_bets_placed = models.IntegerField(null=True)
+    total_white_eur_bet = models.IntegerField(null=True)
+    total_white_bets_placed = models.IntegerField(null=True)
+    total_black_eur_bet = models.IntegerField(null=True)
+    total_black_bets_placed = models.IntegerField(null=True)
+    total_bets_placed = models.IntegerField(null=True)
+    total_eur_bet = models.IntegerField(null=True)
+    total_retention_eur = models.IntegerField(null=True)
