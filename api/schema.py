@@ -16,6 +16,7 @@ class ServerResultType(graphene.ObjectType):
     total_white_bets_placed = graphene.Int()
     total_black_eur_bet = graphene.Int()
     total_black_bets_placed = graphene.Int()
+    total_eur_bet = graphene.Int()
     total_bets_placed = graphene.Int()
     total_eur_bet = graphene.Int()
     total_retention_eur = graphene.Int()
