@@ -14,8 +14,6 @@ config.read("api/config-list.ini")
 header_ws = json.loads(config['HEADER_WS']['TODOS'])
 url_socket = config['BET']['url_socket']
 
-#dict_channel = regex_dict.read_dict()
-
 class ControlSend:   
     def __init__(self):
         self.updated_at = None
@@ -73,18 +71,10 @@ class ControlSend:
                 result_dict_['total_retention_eur'] = result_dict_['total_eur_bet']  - (result_dict['total_white_eur_bet'] * 14)
             elif result_dict_['bet_color'] == 1 :
                 result_dict_['total_retention_eur'] = result_dict_['total_eur_bet']  - (result_dict['total_red_eur_bet'] * 2 )
-                # print(type(result_dict['total_red_eur_bet']))
-                # print((result_dict['total_red_eur_bet'] * 2))
-                # print(result_dict_['total_eur_bet']  - result_dict['total_red_eur_bet'])
             else:
                 result_dict_['total_retention_eur'] = result_dict_['total_eur_bet']  - (result_dict['total_black_eur_bet'] * 2)
-                # print(type(result_dict['total_black_eur_bet']))
-                # print((result_dict['total_black_eur_bet']*2))
-                # print(result_dict_['total_eur_bet']  - result_dict['total_black_eur_bet'])
             print("TOTAL",result_dict_['total_eur_bet'] )
             print(result_dict_)
-            self.acumulativo_banca += result_dict_['total_retention_eur']
-            print("$$$$$$$",self.acumulativo_banca ,"$$$$$$$$$$")
               
             try:
                 server_result = ServerResult.objects.create(**result_dict_)
@@ -92,17 +82,6 @@ class ControlSend:
          
             except ServerResult.DoesNotExist:
                 print("objeto nao encontrado erro na comunicação com o server")            
-
-
-            
-            
-    # função abaixo faz o tratamento de fonte de sinal por lista.
-    # def bet_list(self,result_dict):  
-    #     if (dict_channel.get(util.date_bet_H_M(result_dict["created_at"]))):
-    #         message_sinal = json.dumps(dict_channel.get(util.date_bet_H_M(result_dict["created_at"])))
-    #         util.send_cliente_sinals_sinals(message_sinal)
-    #         print(dict_channel.get(util.date_bet_H_M(result_dict["created_at"])))
-    #         #print("SINAL: ",dict_channel.pop(util.timestemp_to_string(result_dict["created_at"])))
             
     def connect_websocket(self):
         print(url_socket)
