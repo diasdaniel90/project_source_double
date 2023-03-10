@@ -43,43 +43,37 @@ class ControlSend:
     def teste_msg(self,result_dict):  
         if result_dict["status"] == "waiting" and self.updated_at != result_dict["updated_at"]:
             self.updated_at = result_dict["updated_at"]
-            print("PRONTO PARA APOSTAR")
-            #print(result_dict)
-            self.timestemp_waiting = util.date_to_timestemp(result_dict["created_at"])
-            waiting_dict = {'ID_bet': result_dict['id'],'timestamp': self.timestemp_waiting,
+            print("PRONTO PARA APOSTAR_")
+            timestemp_ = util.date_to_timestemp(result_dict["created_at"])
+            result_dict_ = {'ID_bet': result_dict['id'],'timestamp': timestemp_,
                             'bet_roll': result_dict['roll'], 'bet_color': result_dict['color'],
                             'bet_status':result_dict['status']}
-            print(waiting_dict)
-            server_result = ServerResult.objects.create(**waiting_dict)
+            print(result_dict_)
+            server_result = ServerResult.objects.create(**result_dict_)
             server_result.save()
             
-            #util.send_cliente(json.dumps(waiting_dict))             
-            #self.bet_list(result_dict)
         elif result_dict["status"] == "rolling" and self.updated_at != result_dict["updated_at"]:
             self.updated_at = result_dict["updated_at"]
-            print("APOSTAS FECHADAS")
-            #print(result_dict)
-            self.timestemp_rolling = util.date_to_timestemp(result_dict["created_at"])
+            print("APOSTAS FECHADAS_")
+            timestemp_ = util.date_to_timestemp(result_dict["created_at"])
 
-            waiting_dict = {'ID_bet': result_dict['id'],'timestamp': self.timestemp_waiting,
+
+            result_dict_ = {'ID_bet': result_dict['id'],'timestamp': timestemp_,
                             'bet_roll': result_dict['roll'], 'bet_color': result_dict['color'],
                             'bet_status':result_dict['status']}
+            print(result_dict_)    
+
             try:
-                server_result = ServerResult.objects.get(ID_bet=result_dict['id'])
-                server_result.bet_color = result_dict['color']
-                server_result.bet_roll = result_dict['roll']
+                server_result = ServerResult.objects.get(ID_bet=result_dict_['id'])
+                server_result.bet_color = result_dict_['color']
+                server_result.bet_roll = result_dict_['roll']
                 server_result.save()
             except ServerResult.DoesNotExist:
-                print("objeto nao encontrado erro na comunicação com o server")
-            
-            print(waiting_dict)    
-            #util.send_cliente(json.dumps(rolling_dict))
-            #rolling_dict['ajust_created_at'] = util.timestemp_to_string(self.timestemp_rolling)
-            #util.report(rolling_dict)
-            
+                print("objeto nao encontrado erro na comunicação com o server")            
 
-    # def bet_list(self,result_dict):
-        
+
+    # função abaixo faz o tratamento de fonte de sinal por lista.
+    # def bet_list(self,result_dict):  
     #     if (dict_channel.get(util.date_bet_H_M(result_dict["created_at"]))):
     #         message_sinal = json.dumps(dict_channel.get(util.date_bet_H_M(result_dict["created_at"])))
     #         util.send_cliente_sinals_sinals(message_sinal)
