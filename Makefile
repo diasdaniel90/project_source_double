@@ -14,8 +14,11 @@ install:
 start_ws_daemon:
 	python manage.py start_client_ws
 
-target: start_ws_daemon server
+start_telegram_daemon:
+	python manage.py start_telegram
+
+target: server start_ws_daemon start_telegram_daemon
 
 run:
-	make -i -j2 target
+	make -i -j3 target
 
