@@ -56,49 +56,47 @@ with client:
     client.loop.run_until_complete(main(phone))
     print("estou vivo")
     
-    client.start()  
-                                      #5419023244 
-    @client.on(events.NewMessage(chats=5419023244)) #BotTelegram
+    client.start()  #5419023244
+                                      #BOTTELEGRAM   5419023244    
+    @client.on(events.NewMessage(chats=5419023244)) #BOTTELEGRAM 
     async def my_event_handler(event):
-        print("-------------------------------------------")
-        print("BotTelegram")
+        #print("-------------------------------------------")
+        #print("BOTTELEGRAM")
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
-        print(strs)
+        #print(strs)
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
-                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "BotTelegram"})
+                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "BOTTELEGRAM"})
                 print(json_send)
                 util.send_cliente_sinals(json_send)
             elif re.search('preto', strs,re.IGNORECASE):
-                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "BotTelegram"})
+                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "BOTTELEGRAM"})
                 print(json_send)
                 util.send_cliente_sinals(json_send)
             else:
                 print(strs)
                 print("########not sinal##########") 
-
-
-                                       
+                                    
     @client.on(events.NewMessage(chats=1844400705)) #quebrancoablaze
     async def my_event_handler(event):
-        print("-------------------------------------------")
-        print("quebrancoablaze")
+        #print("-------------------------------------------")
+        #print("quebrancoablaze")
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
-        print(strs)
+        #print(strs)
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "quebrancoablaze"})
@@ -116,10 +114,10 @@ with client:
 
     @client.on(events.NewMessage(chats=1642769661)) #BLAZE OFICIAL TENDÊNCIA DE BRANCO
     async def my_event_handler(event):
-        print("-------------------------------------------")
-        print("#BLAZE OFICIAL TENDÊNCIA DE BRANCO")
+        #print("-------------------------------------------")
+        #print("#BLAZE OFICIAL TENDÊNCIA DE BRANCO")
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         strs = re.sub(r"[^a-zA-Z0-9:\n]","",event.raw_text)
         if re.search('POSSVELBRANCO', strs,re.IGNORECASE) and re.search('Entre', strs,re.IGNORECASE):  
             dict_channel_b = {}
@@ -136,16 +134,16 @@ with client:
     @client.on(events.NewMessage(chats=1570776802)) #BLAZE OFICIAL DOUBLE VIP
     async def my_event_handler(event):
         #print(event.raw_text)
-        print("-------")
-        print("BLAZE OFICIAL DOUBLE VIP")
+        #print("-------")
+        #print("BLAZE OFICIAL DOUBLE VIP")
         
         strs = re.sub(r"[^a-zA-Z0-9\n']","",event.raw_text)
         #print(strs[0])
         line = strs.split("\n")
-        print(line[0])
+        #print(line[0])
         strs = line[0]
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         if re.search('entrarno', strs,re.IGNORECASE) and re.search('Apso', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "blazeoficial"})
@@ -164,23 +162,23 @@ with client:
     @client.on(events.NewMessage(chats=1361655475)) #doubleimperial
     async def my_event_handler(event):
         #print(event.raw_text)
-        print("-------")
-        print("doubleimperial")
+        #print("-------")
+        #print("doubleimperial")
         strs = re.sub(r"[^a-zA-Z0-9⚫️🔴']","",event.raw_text)
         #print(strs)
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         if re.search('EntradaConfirmadaAtG2Entrada', strs,re.IGNORECASE) and re.search('Apsonum', strs,re.IGNORECASE):  
             if re.search('🔴', strs,re.IGNORECASE): #and re.search('vermelho', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "doubleimperial"})
-                print(json_send)
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             elif re.search('⚫️', strs,re.IGNORECASE): #and re.search('preto', strs,re.IGNORECASE) :
                 json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "doubleimperial"})
-                print(json_send)
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             else:
-                print(strs)
+                #print(strs)
                 print("########not sinal##########")  
 
     # @client.on(events.NewMessage(chats=1583192657)) #robodouble
@@ -234,86 +232,113 @@ with client:
                                       
     @client.on(events.NewMessage(chats=1785855192)) #trovaovip
     async def my_event_handler(event):
-        print("-------------------------------------------")
-        print("trovaovip")
+        #print("-------------------------------------------")
+        #print("trovaovip")
 
         strs = re.sub(r"[^a-zA-Z0-9🔴⚫️𝗔-𝗨']","",event.raw_text)
         #print(strs)
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         if re.search('𝗖𝗢𝗥𝗗𝗔𝗔𝗣𝗢𝗦𝗧𝗔', strs,re.IGNORECASE) and re.search('𝗝𝗢𝗚𝗔𝗥', strs,re.IGNORECASE):  
             if re.search('🔴', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "trovaovip"})
-                print(json_send)
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             elif re.search('⚫️', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "trovaovip"})
-                print(json_send)
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             else:
-                print(strs)
+                #print(strs)
                 print("########not sinal##########")            
 
     
-                                #int(api_channel)
-    @client.on(events.NewMessage(chats=1461554132)) #PROFESSOR VITALICIO
+    @client.on(events.NewMessage(chats=1461554132)) #Sinais Double          1461554132
     async def my_event_handler(event):
-        print("-------------------------------------------")
-        print("PROFESSOR VITALICIO")
-        print(event.raw_text)
+        #print("-------------------------------------------")
+        #print("Sinais Double VITALICIO")
+        #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
-                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "professor"})
-                print(json_send)
+                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "Sinais Double"})
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             elif re.search('preto', strs,re.IGNORECASE):
-                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "professor"})
-                print(json_send)
+                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "Sinais Double"})
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             else:
-                print(strs)
+                #print(strs)
                 print("########not sinal##########")         
                                         #1725615740
     @client.on(events.NewMessage(chats=1725615740)) #aglair
     async def my_event_handler(event):
-        print("-------------------------------------------")
-        print("aglair")
+        #print("-------------------------------------------")
+        #print("aglair")
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️]","",event.raw_text)
         #print(strs)
         if re.search('CHANCE DE BRANCO', strs,re.IGNORECASE) and re.search('LISTA DOUBLE AGLAIR BLAZE VIP', strs,re.IGNORECASE):  
             dict_channel = regex_telegram.channel_aglair(event.raw_text)
             json_send = json.dumps({"source": "aglair", "type": "list" , "time":timestamp, "sinals": dict_channel})
-            print(json_send)
+            #print(json_send)
             util.send_cliente_sinals(json_send)
 
 
-    @client.on(events.NewMessage(chats=1642155096)) #
+    @client.on(events.NewMessage(chats=1642155096)) #Sinais Blaze Double 24hrs   1642155096
     async def my_event_handler(event):
-        print("-------------------------------------------")
+        #print("-------------------------------------------")
         print("vip24hrs")
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
-        print(util.timestemp_to_string(timestamp))
+        #print(util.timestemp_to_string(timestamp))
 
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️]","",event.raw_text)
-        #print(strs)
+        print(strs)
         timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
         if re.search('realizar at', strs,re.IGNORECASE) and re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "vip24hrs"})
-                print(json_send)
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             elif re.search('preto', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "vip24hrs"})
-                print(json_send)
+                #print(json_send)
                 util.send_cliente_sinals(json_send)
             else:
-                print(strs)
+                #print(strs)
                 print("########not sinal##########") 
+
+                                     #MASTER BLAZE OFICIAL   1755113665    
+    @client.on(events.NewMessage(chats=1755113665)) #MASTER BLAZE OFICIAL 
+    async def my_event_handler(event):
+        #print("-------------------------------------------")
+        #print("MASTER BLAZE OFICIAL")
+        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        #print(util.timestemp_to_string(timestamp))
+        #print(event.raw_text)
+        #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
+        #print(event.raw_text)
+        strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
+        #print(strs)
+        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        #print(util.timestemp_to_string(timestamp))
+        if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
+            if re.search('vermelho', strs,re.IGNORECASE):
+                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "MASTER BLAZE OFICIAL "})
+                #print(json_send)
+                util.send_cliente_sinals(json_send)
+            elif re.search('preto', strs,re.IGNORECASE):
+                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "MASTER BLAZE OFICIAL "})
+                #print(json_send)
+                util.send_cliente_sinals(json_send)
+            else:
+                #print(strs)
+                print("########not sinal##########") 
+
 
 
     client.run_until_disconnected()

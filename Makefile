@@ -21,4 +21,3 @@ target: server start_ws_daemon start_telegram_daemon
 
 run:
 	make -i -j3 target
-
