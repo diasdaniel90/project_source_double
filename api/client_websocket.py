@@ -42,10 +42,12 @@ class ControlSend:
         if result_dict["status"] == "waiting" and self.updated_at != result_dict["updated_at"]:
             self.updated_at = result_dict["updated_at"]
             print("PRONTO PARA APOSTAR_")
+                       
             timestemp_ = util.date_to_timestemp(result_dict["created_at"])
             result_dict_ = {'ID_bet': result_dict['id'],
                             'timestamp': timestemp_,
-                            'bet_status':result_dict['status']}
+                            'bet_status':result_dict['status']}            
+            util.send_cliente(json.dumps(result_dict_))   
             print(result_dict_)
             # server_result = ServerResult.objects.create(**result_dict_)
             # server_result.save()
@@ -67,6 +69,11 @@ class ControlSend:
                             'total_bets_placed' : result_dict['total_red_bets_placed'] + result_dict['total_white_bets_placed'] + result_dict['total_black_bets_placed'],
                             'total_eur_bet' :  result_dict['total_white_eur_bet'] + result_dict['total_red_eur_bet'] + result_dict['total_black_eur_bet']
                             }
+            
+            rolling_dict = {'ID_bet': result_dict['id'],'timestamp': timestemp_,
+                            'bet_roll': result_dict['roll'], 'bet_color': result_dict['color'],
+                            'bet_status' : result_dict['status']}    
+            util.send_cliente(json.dumps(rolling_dict))  
             if result_dict_['bet_color'] == 0:
                 result_dict_['total_retention_eur'] = result_dict_['total_eur_bet']  - (result_dict['total_white_eur_bet'] * 14)
             elif result_dict_['bet_color'] == 1 :

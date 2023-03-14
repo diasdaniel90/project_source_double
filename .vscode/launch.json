@@ -5,7 +5,29 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Django",
+            "name": "start_control_bet Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "start_control_bet"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
+            "name": "start_telegram Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "start_telegram"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
+            "name": "start_client_ws Python: Django",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
@@ -16,7 +38,7 @@
             "justMyCode": true
         },
         {
-            "name": "Python: Django",
+            "name": "runserver Python: Django",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",

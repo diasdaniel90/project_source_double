@@ -85,22 +85,22 @@ class cache_async(create_bet,balanceWin):
             #print("item:",item)
             #print("item:",self.dict_sinals)
             #print(item,dicio.get(item).get('sinals').get('08:30'))
-            print("***************",util.timestemp_to_string_H_M(message_status["created_at"]))
-            item_aux = self.dict_sinals.get(item).get('sinals').get(util.timestemp_to_string_H_M(message_status["created_at"]))
+            print("***************",util.timestemp_to_string_H_M(message_status["timestamp"]))
+            item_aux = self.dict_sinals.get(item).get('sinals').get(util.timestemp_to_string_H_M(message_status["timestamp"]))
             if item_aux:
                 print(item_aux) 
-                self.list_bets_sinals.append(create_bet(message_status['id'], 
+                self.list_bets_sinals.append(create_bet(message_status['ID_bet'], 
                                                     item_aux['color'], item, 0,message_status['ajust_created_at']))   
                 #print("bet",self.list_bets_sinals)
-                print("pop:",self.dict_sinals.get(item).get('sinals').pop(util.timestemp_to_string_H_M(message_status["created_at"])))
+                print("pop:",self.dict_sinals.get(item).get('sinals').pop(util.timestemp_to_string_H_M(message_status["timestamp"])))
 
         #print("fim:",self.dict_sinals)
 
     def convert_sinal_to_bet(self,message_status):
         if self.list_sinals:
             for item in self.list_sinals:
-                if (item['time'] - message_status['created_at']) <= 5 and (item['time'] - message_status['created_at']) >= -15:
-                    print(item['source'],"---------Diferença dentro" ,item['time'] - message_status['created_at'])
+                if (item['time'] - message_status['timestamp']) <= 5 and (item['time'] - message_status['timestamp']) >= -15:
+                    print(item['source'],"---------Diferença dentro" ,item['time'] - message_status['timestamp'])
                     # color = item['color']
                     # if item['color'] == 1:
                     #     color = 2
@@ -120,11 +120,11 @@ class cache_async(create_bet,balanceWin):
                     # else:
                     color = item['color']
                     
-                    self.list_bets_sinals.append(create_bet(message_status['id'], 
+                    self.list_bets_sinals.append(create_bet(message_status['ID_bet'], 
                                                     color, item['source'], 0,message_status['ajust_created_at']))   
 
                 else:
-                    print(item['source']," ---------########Diferença fora #######--------" ,item['time'] - message_status['created_at'],)
+                    print(item['source']," ---------########Diferença fora #######--------" ,item['time'] - message_status['timestamp'],)
             self.list_sinals.clear()
     
     def set_id(self,id):
@@ -134,10 +134,10 @@ class cache_async(create_bet,balanceWin):
                 
     def verify_win(self,message_status):
         for item in self.list_bets_sinals:
-            if item.color == message_status['color'] and item.id == message_status['id']:
+            if item.color == message_status['bet_color'] and item.id == message_status['ID_bet']:
                 item.win = balanceWin().calc_balance_win_bet(True,item.amount,item.color)
                 item.win_status = 1
-                item.result_color = message_status['color']
+                item.result_color = message_status['bet_color']
                 item.amount_return = item.amount * 2
                 if item.color == 0:
                     if item.gale < self.dict_gale.get(item.source):
@@ -147,7 +147,7 @@ class cache_async(create_bet,balanceWin):
                 print("---------------gale------------")
                 item.win = balanceWin().calc_balance_win_bet(False,item.amount,item.color)
                 item.win_status = -1
-                item.result_color = message_status['color']
+                item.result_color = message_status['bet_color']
 
                 print(item.source)
                 if self.dict_gale.get(item.source):
@@ -236,7 +236,7 @@ class cache_async(create_bet,balanceWin):
     
     def convert_score_bet(self,message_status):
         if self.obj_score.permission and not self.find_element_list('virtual_score'):
-            self.list_bets_sinals.append(create_bet(message_status['id'], self.obj_score.decisao_color , 
+            self.list_bets_sinals.append(create_bet(message_status['ID_bet'], self.obj_score.decisao_color , 
                                                     self.obj_score.source, self.obj_score.total_score, message_status['ajust_created_at'] ))
         
         

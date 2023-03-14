@@ -20,7 +20,7 @@ async def coroutine_task_status_waiting(message_status):
     if obj_cache_.list_bets_sinals:
         obj_cache_.score_bet()
         obj_cache_.convert_score_bet(message_status)
-        obj_cache_.set_id(message_status['id'])
+        obj_cache_.set_id(message_status['ID_bet'])
         
         #APOSTA REAL
         print("**************",obj_cache_.stop_loss,"**************")
@@ -67,10 +67,10 @@ class EchoServerProtocol_status:
 
     def datagram_received(self, data, addr):
         message_status = json.loads(data.decode("utf-8"))
-        message_status.update({'ajust_created_at': util.timestemp_to_string(message_status['created_at'])})
+        message_status.update({'ajust_created_at': util.timestemp_to_string(message_status['timestamp'])})
         
-        obj_cache_.var_status = message_status
-        if message_status['status'] == 'waiting':
+        #obj_cache_.var_status = message_status
+        if message_status['bet_status'] == 'waiting':
             task_status_waiting = asyncio.create_task(coroutine_task_status_waiting(message_status))
             asyncio.gather(task_status_waiting)
         else:

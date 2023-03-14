@@ -17,6 +17,9 @@ start_ws_daemon:
 start_telegram_daemon:
 	python manage.py start_telegram
 
+start_control_bet_daemon:
+	python manage.py start_control_bet
+
 target: server start_ws_daemon start_telegram_daemon
 
 run:
