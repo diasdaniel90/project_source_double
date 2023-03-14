@@ -62,14 +62,13 @@ with client:
     async def my_event_handler(event):
         #print("-------------------------------------------")
         #print("BOTTELEGRAM")
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
         #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
         #print(strs)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
@@ -88,14 +87,13 @@ with client:
     async def my_event_handler(event):
         #print("-------------------------------------------")
         #print("quebrancoablaze")
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
         #print(strs)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
         #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
@@ -116,7 +114,7 @@ with client:
     async def my_event_handler(event):
         #print("-------------------------------------------")
         #print("#BLAZE OFICIAL TENDÊNCIA DE BRANCO")
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         strs = re.sub(r"[^a-zA-Z0-9:\n]","",event.raw_text)
         if re.search('POSSVELBRANCO', strs,re.IGNORECASE) and re.search('Entre', strs,re.IGNORECASE):  
@@ -142,7 +140,7 @@ with client:
         line = strs.split("\n")
         #print(line[0])
         strs = line[0]
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('entrarno', strs,re.IGNORECASE) and re.search('Apso', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
@@ -166,7 +164,7 @@ with client:
         #print("doubleimperial")
         strs = re.sub(r"[^a-zA-Z0-9⚫️🔴']","",event.raw_text)
         #print(strs)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('EntradaConfirmadaAtG2Entrada', strs,re.IGNORECASE) and re.search('Apsonum', strs,re.IGNORECASE):  
             if re.search('🔴', strs,re.IGNORECASE): #and re.search('vermelho', strs,re.IGNORECASE):
@@ -193,7 +191,7 @@ with client:
     #     line = strsaux.split("\n")
     #     #print(line[0])
     #     strs = line[0]
-    #     timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+    #     timestamp = timestamp = datetime.timestamp(event.date)
     #     print(util.timestemp_to_string(timestamp))
     #     if re.search('apostarno', strs,re.IGNORECASE):# #and re.search('realizarat', strs,re.IGNORECASE):  
     #         if re.search('🟥', strs,re.IGNORECASE) and re.search('vermelho', strs,re.IGNORECASE):
@@ -217,7 +215,7 @@ with client:
     # async def my_event_handler(event):
     #     print("-----------------------------------------------------------")
     #     strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️]","",event.raw_text)
-    #     timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+    #     timestamp = timestamp = datetime.timestamp(event.date)
 
     #     if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
     #         if re.search('vermelho', strs,re.IGNORECASE):
@@ -237,7 +235,7 @@ with client:
 
         strs = re.sub(r"[^a-zA-Z0-9🔴⚫️𝗔-𝗨']","",event.raw_text)
         #print(strs)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('𝗖𝗢𝗥𝗗𝗔𝗔𝗣𝗢𝗦𝗧𝗔', strs,re.IGNORECASE) and re.search('𝗝𝗢𝗚𝗔𝗥', strs,re.IGNORECASE):  
             if re.search('🔴', strs,re.IGNORECASE):
@@ -259,7 +257,7 @@ with client:
         #print("Sinais Double VITALICIO")
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
@@ -278,7 +276,7 @@ with client:
     async def my_event_handler(event):
         #print("-------------------------------------------")
         #print("aglair")
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️]","",event.raw_text)
         #print(strs)
@@ -293,12 +291,12 @@ with client:
     async def my_event_handler(event):
         #print("-------------------------------------------")
         print("vip24hrs")
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
 
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️]","",event.raw_text)
         print(strs)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         if re.search('realizar at', strs,re.IGNORECASE) and re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
                 json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "vip24hrs"})
@@ -317,14 +315,14 @@ with client:
     async def my_event_handler(event):
         #print("-------------------------------------------")
         #print("MASTER BLAZE OFICIAL")
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
         #print(strs)
-        timestamp = datetime.timestamp(event.date.astimezone(fuso_horario))
+        timestamp = timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
