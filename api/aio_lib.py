@@ -8,11 +8,11 @@ import json
 
 
 
-async def save(dicio,collection):
-    async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
-        writer = AsyncDictWriter(afp, dicio.keys(), restval="NULL", quoting=csv.QUOTE_ALL)
-        #await writer.writeheader()
-        await writer.writerow(dicio)   
+# async def save(dicio,collection):
+#     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
+#         writer = AsyncDictWriter(afp, dicio.keys(), restval="NULL", quoting=csv.QUOTE_ALL)
+#         #await writer.writeheader()
+#         await writer.writerow(dicio)   
 
 async def save_list_obj(lista, collection):
     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
@@ -23,12 +23,12 @@ async def save_list_obj(lista, collection):
             await writer.writerow(dicionario.__dict__)  
 
         
-async def save_dicts_to_list(dicionario, collection):
-    async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
-        writer = AsyncWriter(afp, dialect="unix")
-        print("save_dicts_to_list:",list(dicionario.values()))
-        for lista in list(dicionario.values()):   
-            await writer.writerow(list(lista.values()))
+# async def save_dicts_to_list(dicionario, collection):
+#     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
+#         writer = AsyncWriter(afp, dialect="unix")
+#         print("save_dicts_to_list:",list(dicionario.values()))
+#         for lista in list(dicionario.values()):   
+#             await writer.writerow(list(lista.values()))
 
         #await writer.writerows([["John", 26], ["Sasha", 42], ["Hana", 37]])    
         

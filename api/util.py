@@ -69,13 +69,13 @@ def bet_last_doubles(result_dict, item, balance_win):
                         'return_amount': item.return_amount, 'win_PV': balance_win.win_PV,'win_B': balance_win.win_B,'win_Total':balance_win.win_Total
                         }))
 
-def report(save_):
-    #fieldnames = ['id', 'color', 'roll','created_at','bet_time','status_bet','win','gale', 'first_gale', 'amount','return_amount','win_PV','win_B','win_Total']
-    with open('report_result.csv', 'a') as f:
-        writer = csv.DictWriter(f, fieldnames=save_.keys())
-        #writer.writeheader()
-        print(save_)
-        writer.writerow(save_)
+# def report(save_):
+#     #fieldnames = ['id', 'color', 'roll','created_at','bet_time','status_bet','win','gale', 'first_gale', 'amount','return_amount','win_PV','win_B','win_Total']
+#     with open('report_result.csv', 'a') as f:
+#         writer = csv.DictWriter(f, fieldnames=save_.keys())
+#         #writer.writeheader()
+#         print(save_)
+#         writer.writerow(save_)
 
 def get_color(number):
     colors = {
