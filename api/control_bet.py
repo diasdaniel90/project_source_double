@@ -14,7 +14,7 @@ async def coroutine_task_status_waiting(message_status):
     await asyncio.sleep(process_time)
     print("FIM DA ESPERA")
     
-    obj_cache_.convert_sinal_list_to_bet(message_status)
+    #obj_cache_.convert_sinal_list_to_bet(message_status)
     obj_cache_.convert_sinal_to_bet(message_status)
 
     if obj_cache_.list_bets_sinals:
