@@ -11,5 +11,7 @@ stop_loss = int(config['BET']['stop_loss'])
 score = int(config['BET']['score'])
 fator_branco = int(config['BET']['fator_branco'])
 wallet = int(config['BET']['wallet'])
-
+process_time = float(config['BET']['process_time'])
+janela_minima = int(config['BET']['janela_minima'])
+janela_maxima = int(config['BET']['janela_maxima'])
 header_api = json.loads(config['HEADER_API']['TODOS'])

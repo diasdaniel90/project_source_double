@@ -99,7 +99,7 @@ class cache_async(create_bet,balanceWin):
     def convert_sinal_to_bet(self,message_status):
         if self.list_sinals:
             for item in self.list_sinals:
-                if (item['time'] - message_status['timestamp']) <= 5 and (item['time'] - message_status['timestamp']) >= -15:
+                if (item['time'] - message_status['timestamp']) <= get_config.janela_maxima and (item['time'] - message_status['timestamp']) >= get_config.janela_minima:
                     print(item['source'],"---------Diferença dentro" ,item['time'] - message_status['timestamp'])
                     # color = item['color']
                     # if item['color'] == 1:
@@ -127,13 +127,16 @@ class cache_async(create_bet,balanceWin):
                     print(item['source']," ---------########Diferença fora #######--------" ,item['time'] - message_status['timestamp'],)
             self.list_sinals.clear()
     
-    def set_id(self,id):
+    def set_id(self,id_):
         if self.list_bets_sinals:
             for item in self.list_bets_sinals:
-                item.id = id
+                item.id = id_
                 
     def verify_win(self,message_status):
         for item in self.list_bets_sinals:
+            print("BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG")
+            print(item.color,message_status['bet_color'],)
+            print(item.id,message_status['ID_bet'])
             if item.color == message_status['bet_color'] and item.id == message_status['ID_bet']:
                 item.win = balanceWin().calc_balance_win_bet(True,item.amount,item.color)
                 item.win_status = 1

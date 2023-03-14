@@ -10,8 +10,7 @@ async def coroutine_task_status_waiting(message_status):
     # task_save_waiting = asyncio.create_task(aio_lib.save(message_status,'result'))
     # asyncio.gather(task_save_waiting)
     print('+++++PRONTO PARA APOSTAR: %s' % (message_status))
-    process_time = 1
-    await asyncio.sleep(process_time)
+    await asyncio.sleep(get_config.process_time)
     print("FIM DA ESPERA")
     
     #obj_cache_.convert_sinal_list_to_bet(message_status)
@@ -20,6 +19,7 @@ async def coroutine_task_status_waiting(message_status):
     if obj_cache_.list_bets_sinals:
         obj_cache_.score_bet()
         obj_cache_.convert_score_bet(message_status)
+        print("ID_bet",message_status['ID_bet'])
         obj_cache_.set_id(message_status['ID_bet'])
         
         #APOSTA REAL
