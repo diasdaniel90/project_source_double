@@ -5,8 +5,7 @@ import aiohttp
 import asyncio
 from api import get_config
 import json
-
-
+from api.models import ControlBetResult
 
 # async def save(dicio,collection):
 #     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
@@ -14,18 +13,22 @@ import json
 #         #await writer.writeheader()
 #         await writer.writerow(dicio)   
 
-
-
-
 async def save_list_obj(lista, collection):
+    for item in lista:
+        print(item)
+        server_result = ControlBetResult.objects.create(**item)
+        server_result.save()
+    
+    
+    
+    
     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
         writer = AsyncDictWriter(afp, lista[0].__dict__, restval="NULL", quoting=csv.QUOTE_ALL)
         #await writers.writeheader()
         for dicionario in lista:   
             print("save_list:",dicionario.__dict__)     
             await writer.writerow(dicionario.__dict__)  
-
-        
+ 
 # async def save_dicts_to_list(dicionario, collection):
 #     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
 #         writer = AsyncWriter(afp, dialect="unix")

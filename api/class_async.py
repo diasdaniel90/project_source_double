@@ -3,9 +3,10 @@ from api import get_config
 import json
 from api import util
 class create_bet:
-    def __init__(self, id, color, source,score_bet,created_ajust)-> None:
+    def __init__(self, id, color, source,score_bet,timestamp)-> None:
         self.id = id
         self.first_id_gale = id
+        self.timestamp = timestamp
         self.color = color
         self.source = source
         self.amount = get_config.amount
@@ -16,9 +17,6 @@ class create_bet:
         self.win = None
         self.win_status = None
         self.result_color = None
-        self.created_ajust = created_ajust
-    #def set_id_(self,id):
-    #     self.id = id
 
 class balanceWin():
     def calc_balance_win_bet(self, win,amount,color):
@@ -53,8 +51,6 @@ class balanceWinSource():
     def CalcBalanceWinSource(self,win, gale, source):
         print("")
 
-
-
 class cache_async(create_bet,balanceWin):
     def __init__(self):  
         self.stop_loss = False
@@ -78,50 +74,32 @@ class cache_async(create_bet,balanceWin):
         self.dict_sinals = {}
         print("value",self.dict_gale)
 
-    def convert_sinal_list_to_bet(self,message_status):
-        #print("convert",self.dict_sinals)
+    # def convert_sinal_list_to_bet(self,message_status):
+    #     #print("convert",self.dict_sinals)
         
-        for item in list(self.dict_sinals.keys()):
-            #print("item:",item)
-            #print("item:",self.dict_sinals)
-            #print(item,dicio.get(item).get('sinals').get('08:30'))
-            print("***************",util.timestemp_to_string_H_M(message_status["timestamp"]))
-            item_aux = self.dict_sinals.get(item).get('sinals').get(util.timestemp_to_string_H_M(message_status["timestamp"]))
-            if item_aux:
-                print(item_aux) 
-                self.list_bets_sinals.append(create_bet(message_status['ID_bet'], 
-                                                    item_aux['color'], item, 0,message_status['ajust_created_at']))   
-                #print("bet",self.list_bets_sinals)
-                print("pop:",self.dict_sinals.get(item).get('sinals').pop(util.timestemp_to_string_H_M(message_status["timestamp"])))
+    #     for item in list(self.dict_sinals.keys()):
+    #         #print("item:",item)
+    #         #print("item:",self.dict_sinals)
+    #         #print(item,dicio.get(item).get('sinals').get('08:30'))
+    #         print("***************",util.timestemp_to_string_H_M(message_status["timestamp"]))
+    #         item_aux = self.dict_sinals.get(item).get('sinals').get(util.timestemp_to_string_H_M(message_status["timestamp"]))
+    #         if item_aux:
+    #             print(item_aux) 
+    #             self.list_bets_sinals.append(create_bet(message_status['ID_bet'], 
+    #                                                 item_aux['color'], item, 0,message_status['ajust_created_at']))   
+    #             #print("bet",self.list_bets_sinals)
+    #             print("pop:",self.dict_sinals.get(item).get('sinals').pop(util.timestemp_to_string_H_M(message_status["timestamp"])))
 
-        #print("fim:",self.dict_sinals)
+    #     #print("fim:",self.dict_sinals)
 
     def convert_sinal_to_bet(self,message_status):
         if self.list_sinals:
             for item in self.list_sinals:
                 if (item['time'] - message_status['timestamp']) <= get_config.janela_maxima and (item['time'] - message_status['timestamp']) >= get_config.janela_minima:
                     print(item['source'],"---------Diferença dentro" ,item['time'] - message_status['timestamp'])
-                    # color = item['color']
-                    # if item['color'] == 1:
-                    #     color = 2
-                    # elif item['color'] == 2:
-                    #     color = 1
-                    # elif item['color'] == 0:
-                    #     color = 0
-
-                    # if self.balanceWinDict.get(item['source']):
-                    #     if self.balanceWinDict.get(item['source']).get('win') > 0 :
-                    #         if item['color'] == 1:
-                    #             color = 2
-                    #         elif item['color'] == 2:
-                    #             color = 1
-                    #     else:
-                    #         color = item['color']
-                    # else:
                     color = item['color']
-                    
                     self.list_bets_sinals.append(create_bet(message_status['ID_bet'], 
-                                                    color, item['source'], 0,message_status['ajust_created_at']))   
+                                                    color, item['source'], 0,message_status['timestamp']))   
 
                 else:
                     print(item['source']," ---------########Diferença fora #######--------" ,item['time'] - message_status['timestamp'],)
@@ -167,14 +145,14 @@ class cache_async(create_bet,balanceWin):
             if item.status_bet == 'created':
                 source = 'real_bet'
                 if  self.balanceWinDict.get(source):
-                    self.balanceWinDict[source]['ajust_created_at'] = message_status['ajust_created_at']
+                    #self.balanceWinDict[source]['ajust_created_at'] = message_status['ajust_created_at']
                     self.balanceWinDict[source]['win'] += item.win
                     if 'G'+str(item.gale) in self.balanceWinDict.get(source):
                         self.balanceWinDict[source]['G'+str(item.gale)] += item.win
                     else:
                         self.balanceWinDict[source]['G'+str(item.gale)] = item.win
                 else:
-                    self.balanceWinDict.update({source:{'ajust_created_at' : message_status['ajust_created_at'] ,'source': source, 
+                    self.balanceWinDict.update({source:{'source': source, 
                                                         'win' : item.win, 'G'+str(item.gale) : item.win}})
                     #0 <= -5 == False
                 if (self.balanceWinDict.get(source).get('win') <= get_config.stop_loss) or (self.balanceWinDict.get(source).get('win') >= get_config.stop_win):
@@ -184,14 +162,14 @@ class cache_async(create_bet,balanceWin):
             
             source = item.source
             if  self.balanceWinDict.get(source):
-                self.balanceWinDict[source]['ajust_created_at'] = message_status['ajust_created_at']
+                #self.balanceWinDict[source]['ajust_created_at'] = message_status['ajust_created_at']
                 self.balanceWinDict[source]['win'] += item.win
                 if 'G'+str(item.gale) in self.balanceWinDict.get(source):
                     self.balanceWinDict[source]['G'+str(item.gale)] += item.win
                 else:
                     self.balanceWinDict[source]['G'+str(item.gale)] = item.win
             else:
-                self.balanceWinDict.update({source:{'ajust_created_at' : message_status['ajust_created_at'] ,'source': source, 
+                self.balanceWinDict.update({source:{'source': source, 
                                                     'win' : item.win, 'G'+str(item.gale) : item.win}})
                 #0 <= -5 == False
             if (self.balanceWinDict.get(source).get('win') <= get_config.stop_loss) or (self.balanceWinDict.get(source).get('win') >= get_config.stop_win):
@@ -228,19 +206,19 @@ class cache_async(create_bet,balanceWin):
     #     print("++++++++++++++func_balance:",self.balanceWinDict) 
         
           
-    def score_bet(self):
-        self.obj_score = class_score_bet()
-        for item in self.list_bets_sinals:
-            if  item.source != 'virtual_score':
-                self.obj_score.calc_score(item.gale,item.color)
-        self.obj_score.select_color()
-        self.obj_score.action_real_bet()
-        self.obj_score.score_print()
+    # def score_bet(self):
+    #     self.obj_score = class_score_bet()
+    #     for item in self.list_bets_sinals:
+    #         if  item.source != 'virtual_score':
+    #             self.obj_score.calc_score(item.gale,item.color)
+    #     self.obj_score.select_color()
+    #     self.obj_score.action_real_bet()
+    #     self.obj_score.score_print()
     
-    def convert_score_bet(self,message_status):
-        if self.obj_score.permission and not self.find_element_list('virtual_score'):
-            self.list_bets_sinals.append(create_bet(message_status['ID_bet'], self.obj_score.decisao_color , 
-                                                    self.obj_score.source, self.obj_score.total_score, message_status['ajust_created_at'] ))
+    # def convert_score_bet(self,message_status):
+    #     if self.obj_score.permission and not self.find_element_list('virtual_score'):
+    #         self.list_bets_sinals.append(create_bet(message_status['ID_bet'], self.obj_score.decisao_color , 
+    #                                                 self.obj_score.source, self.obj_score.total_score, message_status['ajust_created_at'] ))
         
         
     def find_element_list(self,value):
@@ -253,47 +231,47 @@ class cache_async(create_bet,balanceWin):
             return False
         
      
-class class_score_bet():
-    def __init__(self):
-        self.total_score_c1 = 0
-        self.total_score_c2 = 0
-        self.decisao_color = None
-        self.total_score = None
-        self.permission = False
-        self.source = 'virtual_score'
+# class class_score_bet():
+#     def __init__(self):
+#         self.total_score_c1 = 0
+#         self.total_score_c2 = 0
+#         self.decisao_color = None
+#         self.total_score = None
+#         self.permission = False
+#         self.source = 'virtual_score'
 
-    def calc_score(self,gale,color):
-        if color == 1:
-            self.total_score_c1 += 1
-        elif color == 2:
-            self.total_score_c2 += 1
+#     def calc_score(self,gale,color):
+#         if color == 1:
+#             self.total_score_c1 += 1
+#         elif color == 2:
+#             self.total_score_c2 += 1
             
-    def select_color(self):
-        if self.total_score_c1 == self.total_score_c2:
-            self.decisao_color = None
-            self.total_score = 0    
-        if self.total_score_c1 > self.total_score_c2:
-            self.decisao_color = 1
-            self.total_score = self.total_score_c1
-        elif self.total_score_c2 > self.total_score_c1:
-            self.decisao_color = 2
-            self.total_score = self.total_score_c2
+#     def select_color(self):
+#         if self.total_score_c1 == self.total_score_c2:
+#             self.decisao_color = None
+#             self.total_score = 0    
+#         if self.total_score_c1 > self.total_score_c2:
+#             self.decisao_color = 1
+#             self.total_score = self.total_score_c1
+#         elif self.total_score_c2 > self.total_score_c1:
+#             self.decisao_color = 2
+#             self.total_score = self.total_score_c2
    
-    def action_real_bet(self):
-        if self.total_score >= get_config.score:
-            self.permission = True
+#     def action_real_bet(self):
+#         if self.total_score >= get_config.score:
+#             self.permission = True
             
-    def score_print(self):
-        print("===================score_print==============")
-        print("total_score_c1:",self.total_score_c1,
-        "total_score_c2:",self.total_score_c2,
-        "decisao_color:",self.decisao_color,
-        "total_score:",self.total_score,
-        "permission:",self.permission
-        )
-        print("===================score_print==============")
-    def add_real_bet(self):
-        if self.permission:
-            print("class_create_bet")
+#     def score_print(self):
+#         print("===================score_print==============")
+#         print("total_score_c1:",self.total_score_c1,
+#         "total_score_c2:",self.total_score_c2,
+#         "decisao_color:",self.decisao_color,
+#         "total_score:",self.total_score,
+#         "permission:",self.permission
+#         )
+#         print("===================score_print==============")
+#     def add_real_bet(self):
+#         if self.permission:
+#             print("class_create_bet")
                
                 

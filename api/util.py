@@ -105,9 +105,10 @@ def ajuste(date):
 
 
 def date_to_timestemp(date):
-    ajuste_ = ajuste(date)
+    #ajuste_ = ajuste(date)
     #print("ajust:",ajuste_)
-    return datetime.timestamp(ajuste_)
+    date = datetime.strptime(date,"%Y-%m-%dT%H:%M:%S.%fZ") 
+    return datetime.timestamp(date)
 
 def timestemp_to_string(timestemp_):
     return datetime.fromtimestamp(timestemp_).strftime("%Y-%m-%dT%H:%M:%S")

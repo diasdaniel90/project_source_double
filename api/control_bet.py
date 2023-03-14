@@ -17,8 +17,8 @@ async def coroutine_task_status_waiting(message_status):
     obj_cache_.convert_sinal_to_bet(message_status)
 
     if obj_cache_.list_bets_sinals:
-        obj_cache_.score_bet()
-        obj_cache_.convert_score_bet(message_status)
+        #obj_cache_.score_bet()
+        #obj_cache_.convert_score_bet(message_status)
         print("ID_bet",message_status['ID_bet'])
         obj_cache_.set_id(message_status['ID_bet'])
         

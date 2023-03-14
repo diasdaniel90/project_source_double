@@ -20,8 +20,7 @@ class ServerResultType(graphene.ObjectType):
     total_bets_placed = graphene.Int()
     total_eur_bet = graphene.Int()
     total_retention_eur = graphene.Int()
-    
-    
+        
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)     
 
