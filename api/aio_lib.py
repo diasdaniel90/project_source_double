@@ -15,8 +15,10 @@ from api.models import ControlBetResult
 
 async def save_list_obj(lista, collection):
     for item in lista:
-        print(item)
-        server_result = ControlBetResult.objects.create(**item)
+        print(item.__dict__)
+        #teste['id']
+        teste = item.__dict__
+        server_result = ControlBetResult.objects.create(**item.__dict__)
         server_result.save()
     
     

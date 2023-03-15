@@ -29,7 +29,7 @@ class ControlBetResult(models.Model):
     score_bet = models.FloatField(null=False)
     amount_return = models.FloatField(null=False)
     gale = models.IntegerField(null=False)
-    status_bet = models.CharField(max_length=16, null=False, blank=False)
+    status_bet = models.CharField(max_length=16, null=True, blank=True)
     win = models.IntegerField(null=False)
     win_status = models.IntegerField(null=False)
     result_color = models.IntegerField(null=False)

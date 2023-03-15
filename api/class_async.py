@@ -3,9 +3,9 @@ from api import get_config
 import json
 from api import util
 class create_bet:
-    def __init__(self, id, color, source,score_bet,timestamp)-> None:
-        self.id = id
-        self.first_id_gale = id
+    def __init__(self, ID_bet, color, source,score_bet,timestamp)-> None:
+        self.ID_bet = ID_bet
+        self.first_id_gale = ID_bet
         self.timestamp = timestamp
         self.color = color
         self.source = source
@@ -105,17 +105,17 @@ class cache_async(create_bet,balanceWin):
                     print(item['source']," ---------########Diferença fora #######--------" ,item['time'] - message_status['timestamp'],)
             self.list_sinals.clear()
     
-    def set_id(self,id_):
+    def set_id(self,ID_bet):
         if self.list_bets_sinals:
             for item in self.list_bets_sinals:
-                item.id = id_
+                item.ID_bet = ID_bet
                 
     def verify_win(self,message_status):
         for item in self.list_bets_sinals:
             print("BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG")
             print(item.color,message_status['bet_color'],)
-            print(item.id,message_status['ID_bet'])
-            if item.color == message_status['bet_color'] and item.id == message_status['ID_bet']:
+            print(item.ID_bet,message_status['ID_bet'])
+            if item.color == message_status['bet_color'] and item.ID_bet == message_status['ID_bet']:
                 item.win = balanceWin().calc_balance_win_bet(True,item.amount,item.color)
                 item.win_status = 1
                 item.result_color = message_status['bet_color']

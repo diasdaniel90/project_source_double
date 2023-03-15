@@ -53,21 +53,21 @@ def on_pong(ws):
     ws.send("2")
     
     
-def last_doubles(result_dict):
-        return (dict({ 'id' : result_dict["id"],
-                        #'color': get_color(result_dict["color"]), 'roll': result_dict["roll"],
-                        'created_at': date_list(result_dict["created_at"]), #'updated_at':result_dict["updated_at"],
-                        'status': result_dict["status"], 'bet_time': timestemp_to_string(result_dict["created_at"]),
-                        }))
+# def last_doubles(result_dict):
+#         return (dict({ 'id' : result_dict["id"],
+#                         #'color': get_color(result_dict["color"]), 'roll': result_dict["roll"],
+#                         'created_at': date_list(result_dict["created_at"]), #'updated_at':result_dict["updated_at"],
+#                         'status': result_dict["status"], 'bet_time': timestemp_to_string(result_dict["created_at"]),
+#                         }))
 
-def bet_last_doubles(result_dict, item, balance_win):
-    return (dict({ 'id' : result_dict["id"],
-                        'color': get_color(result_dict["color"]), 'roll': result_dict["roll"],
-                        'created_at': date_list(result_dict["created_at"]),# 'updated_at':result_dict["updated_at"],
-                        'status': result_dict["status"], 'bet_time': timestemp_to_string(result_dict["created_at"]),
-                        'status_bet':item.status_bet, 'win': item.win, 'gale': item.count_gale, 'first_gale': item.first_gale, 'amount':item.amount,
-                        'return_amount': item.return_amount, 'win_PV': balance_win.win_PV,'win_B': balance_win.win_B,'win_Total':balance_win.win_Total
-                        }))
+# def bet_last_doubles(result_dict, item, balance_win):
+#     return (dict({ 'id' : result_dict["id"],
+#                         'color': get_color(result_dict["color"]), 'roll': result_dict["roll"],
+#                         'created_at': date_list(result_dict["created_at"]),# 'updated_at':result_dict["updated_at"],
+#                         'status': result_dict["status"], 'bet_time': timestemp_to_string(result_dict["created_at"]),
+#                         'status_bet':item.status_bet, 'win': item.win, 'gale': item.count_gale, 'first_gale': item.first_gale, 'amount':item.amount,
+#                         'return_amount': item.return_amount, 'win_PV': balance_win.win_PV,'win_B': balance_win.win_B,'win_Total':balance_win.win_Total
+#                         }))
 
 # def report(save_):
 #     #fieldnames = ['id', 'color', 'roll','created_at','bet_time','status_bet','win','gale', 'first_gale', 'amount','return_amount','win_PV','win_B','win_Total']
