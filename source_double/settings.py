@@ -125,4 +125,4 @@ GRAPHENE = {
     'SCHEMA': 'source_double.schema.schema',
 }
 
-VERSION = "0.0.0"
+VERSION = "0.0.1"
