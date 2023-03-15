@@ -32,8 +32,8 @@ async def coroutine_task_status_waiting(message_status):
                 # if item.score_bet >= get_config.score and item.source == 'virtual_score' :
                 #     tasks.append(asyncio.create_task(aio_lib.play_bet(item)))
                 #if item.source == 'professor' or item.source ==  'blazeoficial' or item.source == 'vip24hrs' :
-                if item.source == 'professor' or  item.source == 'robodouble' or  item.source == 'quebrancoablaze' :
-                    tasks.append(asyncio.create_task(aio_lib.play_bet(item)))
+                #if item.source == 'professor' or  item.source == 'robodouble' or  item.source == 'quebrancoablaze' :
+                tasks.append(asyncio.create_task(aio_lib.play_bet(item)))
                 await asyncio.gather(*tasks)
     
 async def coroutine_task_status_rolling(message_status): 

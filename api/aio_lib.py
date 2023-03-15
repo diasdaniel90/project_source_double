@@ -38,14 +38,14 @@ async def save_list_obj(lista, collection):
         #await writer.writerows([["John", 26], ["Sasha", 42], ["Hana", 37]])    
         
 async def play_bet(item):
-    # item.status_bet = 'created'
-    payload_ = {"amount":str(item.amount),"currency_type":"BRL","color":float(item.color),"free_bet":False,"wallet_id":get_config.wallet}
-    async with aiohttp.ClientSession() as session:
-        async with session.post('https://blaze.com/api/roulette_bets',headers=get_config.header_api,json=payload_) as resp:
-            print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",await resp.text())
-            json_ = json.loads(await resp.text())
-            if json_.get('bet'):
-                item.status_bet = json_.get('bet').get('status')
+    item.status_bet = 'simulada'
+    # payload_ = {"amount":str(item.amount),"currency_type":"BRL","color":float(item.color),"free_bet":False,"wallet_id":get_config.wallet}
+    # async with aiohttp.ClientSession() as session:
+    #     async with session.post('https://blaze.com/api/roulette_bets',headers=get_config.header_api,json=payload_) as resp:
+    #         print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",await resp.text())
+    #         json_ = json.loads(await resp.text())
+    #         if json_.get('bet'):
+    #             item.status_bet = json_.get('bet').get('status')
 
 
 
