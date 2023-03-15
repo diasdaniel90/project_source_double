@@ -34,19 +34,18 @@ class ControlBetResult(models.Model):
     win_status = models.IntegerField(null=False)
     result_color = models.IntegerField(null=False)
 
+class UserResult(models.Model):
+    ID_bet = models.CharField(max_length=12, null=False, blank=False)
+    ID_bet_uniqa = models.CharField(max_length=16, null=True, blank=True)
+    timestamp = models.FloatField(null=False)
+    color = models.IntegerField(null=False)
+    amount = models.FloatField(null=False)
+    currency_type = models.CharField(max_length=3, null=False, blank=False)
+    user = models.CharField(max_length=12, null=False, blank=False)
 
-# {
-#   "id": 1678819445.061336,
-#   "first_id_gale": 1678819445.061336,
-#   "color": 2,
-#   "source": "channel_1",
-#   "amount": 1.6,
-#   "score_bet": 0,
-#   "amount_return": 0,
-#   "gale": 0,
-#   "status_bet": null,
-#   "win": -1.0,
-#   "win_status": -1,
-#   "result_color": 1,
-#   "created_ajust": "2023-03-14T18:44:05"
-# }
+    # result_dict['id']
+    # result_dict['created_at']
+    # item['color']
+    # item['amount']
+    # item['currency_type']
+    # item['user']['id_str']

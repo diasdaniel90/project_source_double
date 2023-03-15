@@ -3,7 +3,6 @@ import graphene
 from django.conf import settings
 from api.models import ServerResult
 
-
 class ServerResultType(graphene.ObjectType):
     ID_bet = graphene.String()
     timestamp = graphene.Int()
@@ -24,7 +23,6 @@ class ServerResultType(graphene.ObjectType):
 
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)     
-
 
 class Query:
     version = graphene.String()

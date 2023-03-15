@@ -20,10 +20,7 @@ async def save_list_obj(lista, collection):
         teste = item.__dict__
         server_result = ControlBetResult.objects.create(**item.__dict__)
         server_result.save()
-    
-    
-    
-    
+
     async with aiofiles.open(collection+".csv", mode="a", encoding="utf-8", newline="") as afp:
         writer = AsyncDictWriter(afp, lista[0].__dict__, restval="NULL", quoting=csv.QUOTE_ALL)
         #await writers.writeheader()

@@ -8,7 +8,7 @@ from datetime import datetime
 from api import util
 from api import regex_dict
 from api.models import ServerResult
-
+from api.models import UserResult
 config = configparser.ConfigParser()
 config.read("api/config-list.ini")
 header_ws = json.loads(config['HEADER_WS']['TODOS'])
@@ -17,7 +17,8 @@ url_socket = config['BET']['url_socket']
 class ControlSend:   
     def __init__(self):
         self.updated_at = None
-
+        self.count_msg = 0
+        self.count_user = 0
     def on_open(self,ws):
         #websocket.enableTrace(True)
         message = '%d["cmd", {"id": "subscribe", "payload": {"room": "double_v2"}}]' % 421
@@ -36,9 +37,27 @@ class ControlSend:
         if "double.tick" in msg:
             result_dict = json.loads(msg[2:])[1]["payload"]
             self.teste_msg(result_dict)
-            
+            if result_dict["status"] == "waiting" and len(result_dict['bets']) > 0:
+                self.msg_user(result_dict)
+        
+    def msg_user(self, result_dict):
+        for item in result_dict['bets']:
+            user_msg_new, created = UserResult.objects.get_or_create(
+            ID_bet_uniqa = item['id'],
+            ID_bet = result_dict['id'],
+            timestamp = util.date_to_timestemp(result_dict["created_at"]),
+            color = item['color'],
+            amount = item['amount'],
+            currency_type = item['currency_type'],
+            user = item['user']['id_str']   
+            ) 
+            if created:
+                user_msg_new.save()
+        
+        self.count_msg += 1
+        self.count_user += len(result_dict['bets'])
+        
     def teste_msg(self,result_dict):
-        self.acumulativo_banca = 0
         if result_dict["status"] == "waiting" and self.updated_at != result_dict["updated_at"]:
             self.updated_at = result_dict["updated_at"]
             print("PRONTO PARA APOSTAR_")
@@ -49,10 +68,13 @@ class ControlSend:
                             'bet_status':result_dict['status']}            
             util.send_cliente(json.dumps(result_dict_))   
             print(result_dict_)
-            # server_result = ServerResult.objects.create(**result_dict_)
-            # server_result.save()
             
+            #server_result = ServerResult.objects.create(**result_dict_)
+            #server_result.save()
+        
         elif result_dict["status"] == "rolling" and self.updated_at != result_dict["updated_at"]:
+            print("msg_count",self.count_msg)
+            print("count_user",self.count_user)
             self.updated_at = result_dict["updated_at"]
             print("APOSTAS FECHADAS_")
             timestemp_ = util.date_to_timestemp(result_dict["created_at"])
@@ -82,7 +104,7 @@ class ControlSend:
                 result_dict_['total_retention_eur'] = result_dict_['total_eur_bet']  - (result_dict['total_black_eur_bet'] * 2)
             print("TOTAL",result_dict_['total_eur_bet'] )
             print(result_dict_)
-              
+            self.count_msg = 0
             try:
                 server_result = ServerResult.objects.create(**result_dict_)
                 server_result.save()
