@@ -60,14 +60,14 @@ with client:
                                       #BOTTELEGRAM   5419023244    
     @client.on(events.NewMessage(chats=5419023244)) #BOTTELEGRAM 
     async def my_event_handler(event):
-        #print("-------------------------------------------")
+        print("-------------------------------------------")
         #print("BOTTELEGRAM")
         #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
         #print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
-        #print(strs)
+        print(strs)
         timestamp = datetime.timestamp(event.date)
         #print(util.timestemp_to_string(timestamp))
         if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
@@ -82,6 +82,35 @@ with client:
             else:
                 print(strs)
                 print("########not sinal##########") 
+        
+                                      #BOTTELEGRAM  depois_do_sol 6294450052    
+    @client.on(events.NewMessage(chats=6294450052)) #BOTTELEGRAM 
+    async def my_event_handler(event):
+        print("-------------------------------------------")
+        #print("BOTTELEGRAM")
+        #print(util.timestemp_to_string(timestamp))
+        #print(event.raw_text)
+        #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
+        #print(event.raw_text)
+        strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
+        print(strs)
+        timestamp = datetime.timestamp(event.date)
+        #print(util.timestemp_to_string(timestamp))
+        if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
+            if re.search('vermelho', strs,re.IGNORECASE):
+                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "depois_do_sol"})
+                print(json_send)
+                util.send_cliente_sinals(json_send)
+            elif re.search('preto', strs,re.IGNORECASE):
+                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "depois_do_sol"})
+                print(json_send)
+                util.send_cliente_sinals(json_send)
+            else:
+                print(strs)
+                print("########not sinal##########")         
+        
+        
+        
                                     
     @client.on(events.NewMessage(chats=1844400705)) #quebrancoablaze
     async def my_event_handler(event):
