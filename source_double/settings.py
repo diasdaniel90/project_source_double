@@ -125,4 +125,5 @@ GRAPHENE = {
     'SCHEMA': 'source_double.schema.schema',
 }
 
-VERSION = "0.0.1"
+#incrementar a cada push/commit
+VERSION = "0.0.2" 

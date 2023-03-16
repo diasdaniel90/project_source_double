@@ -1,17 +1,13 @@
 import configparser
 import json
-#import asyncio
-                     #date      
 from datetime import datetime, timezone,timedelta
-#import time
-from telethon import TelegramClient, events, sync
+from telethon import TelegramClient, events
 from telethon.errors import SessionPasswordNeededError
 from telethon.tl.functions.messages import (GetHistoryRequest)
 from telethon.tl.functions.messages import (SearchRequest)
 from telethon.tl.types import PeerChannel
 from telethon.tl.types import (InputMessagesFilterEmpty)
 #from telethon import types
-#from zoneinfo import ZoneInfo
 import re
 from api import util
 from api import regex_telegram 
@@ -54,8 +50,13 @@ async def main(phone):
 
 with client:
     client.loop.run_until_complete(main(phone))
-    print("estou vivo")
     
+    banner = """
+    ┌─┐┌─┐┌┬┐┌─┐┬ ┬  ┬  ┬┬┬  ┬┌─┐  
+    ├┤ └─┐ │ │ ││ │  └┐┌┘│└┐┌┘│ │  
+    └─┘└─┘ ┴ └─┘└─┘   └┘ ┴ └┘ └─┘  
+    """  
+    print(banner)
     client.start()  #5419023244
                                       #BOTTELEGRAM   5419023244    
     @client.on(events.NewMessage(chats=5419023244)) #BOTTELEGRAM 
@@ -173,15 +174,15 @@ with client:
         #print(util.timestemp_to_string(timestamp))
         if re.search('entrarno', strs,re.IGNORECASE) and re.search('Apso', strs,re.IGNORECASE):  
             if re.search('vermelho', strs,re.IGNORECASE):
-                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "blazeoficial"})
+                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": "BLAZE OFICIAL DOUBLE VIP"})
                 print(json_send)
                 util.send_cliente_sinals(json_send)
             elif re.search('black', strs,re.IGNORECASE) :
-                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "blazeoficial"})
+                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": "BLAZE OFICIAL DOUBLE VIP"})
                 print(json_send)
                 util.send_cliente_sinals(json_send)
             else:
-                print("channel:blazeoficial 1570776802")
+                print("channel:BLAZE OFICIAL DOUBLE VIP 1570776802")
                 print(timestamp)
                 print(strs)
                 print("########not sinal##########")
