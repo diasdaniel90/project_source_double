@@ -134,6 +134,8 @@ Your-Telegram-Username.session-journal
 bets.csv
 1.session
 dd_meulogin.session
-.gitignore
 dd.session
-.gitignore
+.repli
+poetry.lock
+pyproject.toml
+replit.nix
