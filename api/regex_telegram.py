@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-def channel_aglair(message):
+def channel_a(message):
     lines = re.sub(r"[^0-9🔴⚫️👻:\n ]","",message)
     dicio = {}
     teste = lines.split("\n")
@@ -23,7 +23,7 @@ def channel_aglair(message):
 # print(read_dict())  
 # print(read_dict())  
 
-def channel_branco_ofical(message):
+def channel_branco(message):
     lines = re.sub(r"[^0-9🔴⚫️👻:\n ]","",message)
     dicio = {}
     teste = lines.split("\n")

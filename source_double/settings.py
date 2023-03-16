@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+#import subprocess
+#from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -127,3 +130,31 @@ GRAPHENE = {
 
 #incrementar a cada push/commit
 VERSION = "0.0.2" 
+
+# load_dotenv()  # carrega as variáveis de ambiente do arquivo .env
+
+# VARIAVEL1 = os.getenv('VARIAVEL1')
+# VARIAVEL2 = os.getenv('VARIAVEL2')
+
+# print(VARIAVEL1)
+# print(VARIAVEL2)
+
+#subprocess.run(['source', 'api/config-telegram.ini'], shell=True, check=True)
+
+TELEGRAM_ENV = {
+    "API_ID": os.environ.get("API_ID"),
+    "API_HASH": os.environ.get("API_HASH"),
+    "API_CHANNEL": int(os.environ.get("API_CHANNEL")),
+    "PHONE": int(os.environ.get("PHONE")),
+    "USERNAME": os.environ.get("USERNAME"),
+    "SOURCE_T_1": int(os.environ.get("SOURCE_T_1")),
+    "SOURCE_T_2": int(os.environ.get("SOURCE_T_2")),
+    "SOURCE_T_3": int(os.environ.get("SOURCE_T_3")),
+    "SOURCE_T_4": int(os.environ.get("SOURCE_T_4")),
+    "SOURCE_T_5": int(os.environ.get("SOURCE_T_5")),
+    "SOURCE_T_6": int(os.environ.get("SOURCE_T_6")),
+    "SOURCE_T_7": int(os.environ.get("SOURCE_T_7")),
+    "SOURCE_T_8": int(os.environ.get("SOURCE_T_8")),
+    "SOURCE_T_9": int(os.environ.get("SOURCE_T_9")),  
+}
+print("breack")
