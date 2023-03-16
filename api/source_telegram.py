@@ -1,6 +1,6 @@
 import configparser
 import json
-from datetime import datetime, timezone,timedelta
+from datetime import datetime
 from telethon import TelegramClient, events
 from telethon.errors import SessionPasswordNeededError
 from telethon.tl.functions.messages import (GetHistoryRequest)
@@ -10,7 +10,7 @@ from telethon.tl.types import (InputMessagesFilterEmpty)
 #from telethon import types
 import re
 from api import util
-from api import regex_telegram 
+#from api import regex_telegram 
 from django.conf import settings
 
 

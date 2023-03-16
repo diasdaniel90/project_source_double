@@ -4,9 +4,9 @@ import threading
 from time import sleep
 import json
 import configparser
-from datetime import datetime
+#from datetime import datetime
 from api import util
-from api import regex_dict
+#from api import regex_dict
 from api.models import ServerResult
 from api.models import UserResult
 config = configparser.ConfigParser()

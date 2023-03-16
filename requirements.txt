@@ -23,3 +23,6 @@ yarl==1.8.2
 
 #para carrear as vars de ambiemte do telegram
 python-dotenv==1.0.0
+
+#lib WS async
+websockets==10.4

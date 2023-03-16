@@ -139,3 +139,4 @@ dd.session
 poetry.lock
 pyproject.toml
 replit.nix
+dd.session-journal

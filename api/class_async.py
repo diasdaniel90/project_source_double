@@ -1,7 +1,7 @@
 
 from api import get_config
-import json
-from api import util
+#import json
+#from api import util
 class create_bet:
     def __init__(self, ID_bet, color, source,score_bet,timestamp)-> None:
         self.ID_bet = ID_bet
