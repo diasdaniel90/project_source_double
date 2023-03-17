@@ -8,6 +8,6 @@ class Command(BaseCommand):
         ...
 
     def handle(self, *args, **options):
-        print('Starting <daemon name> daemon')
+        print('Starting control_bet daemon')
         # Execute script here
         main()

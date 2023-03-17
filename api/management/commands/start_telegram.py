@@ -8,6 +8,6 @@ class Command(BaseCommand):
         ...
 
     def handle(self, *args, **options):
-        print('Starting <daemon name> daemon')
+        print('Starting source_telegram daemon')
         # Execute script here
         main()

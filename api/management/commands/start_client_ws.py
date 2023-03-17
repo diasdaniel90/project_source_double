@@ -8,6 +8,6 @@ class Command(BaseCommand):
         ...
 
     def handle(self, *args, **options):
-        print('Starting <daemon name> daemon')
+        print('Starting client_websocket daemon')
         # Execute script here
         main()
