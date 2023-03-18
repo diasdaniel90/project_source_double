@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "async_ws Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": [
+                "start_client_ws_async"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
             "name": "start_control_bet Python: Django",
             "type": "python",
             "request": "launch",

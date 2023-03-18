@@ -22,7 +22,6 @@ print(rolling_dict)
 util.send_cliente(rolling_dict)
 
 
-
 sleep(1)
 timestamp_status = datetime.timestamp(datetime.now())
 waiting_dict = json.dumps({'ID_bet': "B", 'timestamp': timestamp_status, 'bet_status': 'waiting'})
