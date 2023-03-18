@@ -19,13 +19,13 @@ async def coroutine_task_status_waiting(message_status):
     if obj_cache_.list_bets_sinals:
         #obj_cache_.score_bet()
         #obj_cache_.convert_score_bet(message_status)
-        print("ID_bet",message_status['ID_bet'])
+        #print("ID_bet",message_status['ID_bet'])
         obj_cache_.set_id(message_status['ID_bet'])
         
         #APOSTA REAL
-        print("**************",obj_cache_.stop_loss,"**************")
-        print("**************",obj_cache_.stop_loss,"**************")
-        print("**************",obj_cache_.stop_loss,"**************")
+        # print("**************",obj_cache_.stop_loss,"**************")
+        # print("**************",obj_cache_.stop_loss,"**************")
+        # print("**************",obj_cache_.stop_loss,"**************")
         if obj_cache_.list_bets_sinals: #and not obj_cache_.stop_loss:   
             tasks = []
             for item in obj_cache_.list_bets_sinals:
@@ -56,8 +56,8 @@ async def coroutine_task_status_rolling(message_status):
         obj_cache_.list_gale_.clear()
         #obj_cache_.obj_balanceWin.stop_win()
 
-    print("==========balance==================")
-    print(obj_cache_.balanceWinDict)
+    #print("==========balance==================")
+    #print(obj_cache_.balanceWinDict)
     print("====================FIM==================================")   
 
             
@@ -87,12 +87,12 @@ class EchoServerProtocol_sinals:
 
         if not message_signal['type'] == 'list':
             obj_cache_.list_sinals.append(message_signal)
-            print("----------",message_signal)
+            #print("----------",message_signal)
         else:
-            print("vai")
+            #print("vai")
             #print(obj_cache_.dict_sinals)
             obj_cache_.dict_sinals.update({message_signal.get('source'): { 'sinals':message_signal.get('sinals')}})
-            print(obj_cache_.dict_sinals)
+            #print(obj_cache_.dict_sinals)
 
 loop = asyncio.get_event_loop()
 loop_signal = asyncio.get_event_loop()

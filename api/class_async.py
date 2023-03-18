@@ -44,12 +44,12 @@ class balanceWin():
     #         self.real_stop = True
     #     #print("===================True==============")
         
-class balanceWinSource():
-    def __init__(self) -> None:
-        self.win = None
+# class balanceWinSource():
+#     def __init__(self) -> None:
+#         self.win = None
 
-    def CalcBalanceWinSource(self,win, gale, source):
-        print("")
+#     def CalcBalanceWinSource(self,win, gale, source):
+#         print("")
 
 class cache_async(create_bet,balanceWin):
     def __init__(self):  
@@ -72,7 +72,7 @@ class cache_async(create_bet,balanceWin):
                           'quebrancoablaze': get_config.gale_limit,
                           }
         self.dict_sinals = {}
-        print("value",self.dict_gale)
+        #print("value",self.dict_gale)
 
     # def convert_sinal_list_to_bet(self,message_status):
     #     #print("convert",self.dict_sinals)
@@ -112,9 +112,9 @@ class cache_async(create_bet,balanceWin):
                 
     def verify_win(self,message_status):
         for item in self.list_bets_sinals:
-            print("BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG")
-            print(item.color,message_status['bet_color'],)
-            print(item.ID_bet,message_status['ID_bet'])
+            #print("BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG")
+            #print(item.color,message_status['bet_color'],)
+            #print(item.ID_bet,message_status['ID_bet'])
             if item.color == message_status['bet_color'] and item.ID_bet == message_status['ID_bet']:
                 item.win = balanceWin().calc_balance_win_bet(True,item.amount,item.color)
                 item.win_status = 1
@@ -125,15 +125,15 @@ class cache_async(create_bet,balanceWin):
                         self.list_gale_.append(item)
 
             else:
-                print("---------------gale------------")
+                #print("---------------gale------------")
                 item.win = balanceWin().calc_balance_win_bet(False,item.amount,item.color)
                 item.win_status = -1
                 item.result_color = message_status['bet_color']
 
-                print(item.source)
+                #print(item.source)
                 if self.dict_gale.get(item.source):
-                    print(self.dict_gale)
-                    print(self.dict_gale.get(item.source), item.source)
+                    #(self.dict_gale)
+                    #print(self.dict_gale.get(item.source), item.source)
                     if item.gale < self.dict_gale.get(item.source):
                         self.list_gale_.append(item)
                 else:
@@ -224,10 +224,10 @@ class cache_async(create_bet,balanceWin):
     def find_element_list(self,value):
         for x in self.list_bets_sinals:
             if x.source == value:
-                print("i found it!")
+                #print("i found it!")
                 return True
         else:
-            print("i not found it!")
+            #print("i not found it!")
             return False
         
      
