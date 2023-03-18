@@ -2,6 +2,14 @@
 from api import get_config
 #import json
 #from api import util
+
+class ValidBet:
+    def __init__(self) -> None:
+        self.ID_bet = None
+
+    def set_id_bet(self,ID_bet):
+        self.ID_bet = ID_bet
+
 class create_bet:
     def __init__(self, ID_bet, color, source,score_bet,timestamp)-> None:
         self.ID_bet = ID_bet
@@ -17,6 +25,7 @@ class create_bet:
         self.win = None
         self.win_status = None
         self.result_color = None
+        self.result_id = None
 
 class balanceWin():
     def calc_balance_win_bet(self, win,amount,color):
@@ -112,13 +121,14 @@ class cache_async(create_bet,balanceWin):
                 
     def verify_win(self,message_status):
         for item in self.list_bets_sinals:
-            #print("BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG")
-            #print(item.color,message_status['bet_color'],)
-            #print(item.ID_bet,message_status['ID_bet'])
+            print("BUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUGBUG")
+            print(item.color,message_status['bet_color'],)
+            print(item.ID_bet,message_status['ID_bet'])
             if item.color == message_status['bet_color'] and item.ID_bet == message_status['ID_bet']:
                 item.win = balanceWin().calc_balance_win_bet(True,item.amount,item.color)
                 item.win_status = 1
                 item.result_color = message_status['bet_color']
+                item.result_id = message_status['ID_bet']
                 item.amount_return = item.amount * 2
                 if item.color == 0:
                     if item.gale < self.dict_gale.get(item.source):
@@ -129,6 +139,7 @@ class cache_async(create_bet,balanceWin):
                 item.win = balanceWin().calc_balance_win_bet(False,item.amount,item.color)
                 item.win_status = -1
                 item.result_color = message_status['bet_color']
+                item.result_id = message_status['ID_bet']
 
                 #print(item.source)
                 if self.dict_gale.get(item.source):

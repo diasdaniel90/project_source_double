@@ -31,6 +31,7 @@ class ControlBetResultType(graphene.ObjectType):
     win = graphene.Int()
     win_status = graphene.Int()
     result_color = graphene.Int()
+    result_id = graphene.String()
     
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)   
@@ -80,6 +81,7 @@ class Query:
         win = graphene.Int(),
         win_status = graphene.Int(),
         result_color = graphene.Int(),
+        result_id = graphene.String(),
     )
     def resolve_control_bet_result(self, info, **kwargs):
         return ControlBetResult.objects.filter(**kwargs)
