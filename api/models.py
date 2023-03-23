@@ -43,10 +43,3 @@ class UserResult(models.Model):
     amount = models.FloatField(null=False)
     currency_type = models.CharField(max_length=3, null=False, blank=False)
     user = models.CharField(max_length=12, null=False, blank=False)
-
-    # result_dict['id']
-    # result_dict['created_at']
-    # item['color']
-    # item['amount']
-    # item['currency_type']
-    # item['user']['id_str']
