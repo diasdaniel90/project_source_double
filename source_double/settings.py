@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'source_double.wsgi.application'
 # }
 
 ENV_REF = os.environ.get('ENV_REF')
-if ENV_REF == 'production':
+if ENV_REF == 'prod':
     DATABASES = {
         'default': {
             'ENGINE': 'mysql.connector.django',
