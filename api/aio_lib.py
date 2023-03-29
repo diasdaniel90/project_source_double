@@ -13,7 +13,7 @@ from api.models import ControlBetResult
 #         #await writer.writeheader()
 #         await writer.writerow(dicio)   
 
-async def save_list_obj(lista, collection):
+async def save_list_obj(lista):
     for item in lista:
         print(item.__dict__)
         #teste['id']

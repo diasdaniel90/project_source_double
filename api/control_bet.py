@@ -47,8 +47,10 @@ async def coroutine_task_status_rolling(message_status):
         # await asyncio.gather(task_save_balanceWin)
 
         #print("***********",obj_cache_.list_bets_sinals.vars())
-        task_bets_sinals = asyncio.create_task(aio_lib.save_list_obj(obj_cache_.list_bets_sinals,'bets'))
-        await asyncio.gather(task_bets_sinals)
+        task_bets_sinals = asyncio.create_task(aio_lib.save_list_obj(obj_cache_.list_bets_sinals))
+        asyncio.gather(task_bets_sinals)
+        
+        #await aio_lib.save_list_obj(obj_cache_.list_bets_sinals)
         
         obj_cache_.list_bets_sinals.clear()
         obj_cache_.ajust_gale_()
