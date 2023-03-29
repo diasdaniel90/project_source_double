@@ -1,6 +1,6 @@
 import csv
-import aiofiles
-from aiocsv import AsyncDictWriter,AsyncWriter
+#import aiofiles
+#from aiocsv import AsyncDictWriter,AsyncWriter
 import aiohttp
 import asyncio
 from api import get_config
