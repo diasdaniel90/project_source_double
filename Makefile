@@ -20,7 +20,7 @@ start_telegram_daemon:
 start_control_bet_daemon:
 	python manage.py start_control_bet
 
-target: server start_ws_daemon start_telegram_daemon start_control_bet_daemon
+target: server start_telegram_daemon start_control_bet_daemon
 
 run:
-	make -i -j4 target
+	make -i -j3 target

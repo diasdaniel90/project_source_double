@@ -144,3 +144,6 @@ api/management/commands/start_client_ws_async.py
 api/client_websocket_async.py
 ws.py
 nome_do_ambiente_virtual
+source_double/environment/env
+source_double/environment/env_export
+source_double/environment/env

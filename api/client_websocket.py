@@ -25,6 +25,7 @@ class ControlSend:
         ws.send(message)
 
     def on_pong(self,ws, msg):
+        print("send 2")
         ws.send("2")
 
     def on_close(self,ws, status, msg):
@@ -108,6 +109,7 @@ class ControlSend:
             try:
                 server_result = ServerResult.objects.create(**result_dict_)
                 server_result.save()
+                print("foi")
          
             except ServerResult.DoesNotExist:
                 print("objeto nao encontrado erro na comunicação com o server")            
@@ -121,14 +123,20 @@ class ControlSend:
             on_close=self.on_close,
             on_pong=self.on_pong
         )
-        ws_run = ws.run_forever(ping_interval=23,
+        ws.run_forever(ping_interval=23,
                         ping_timeout=15,
-                        ping_payload="3",
+                        ping_payload="2",
                         origin="https://blaze.com",
                         host="api-v2.blaze.com")
-        wst = threading.Thread(target=ws_run)
-        wst.daemon = True
-        wst.start()
+        
+        # ws_run = ws.run_forever(ping_interval=23,
+        #                 ping_timeout=15,
+        #                 ping_payload="3",
+        #                 origin="https://blaze.com",
+        #                 host="api-v2.blaze.com")
+        # wst = threading.Thread(target=ws_run)
+        # wst.daemon = True
+        # wst.start()
         
 def main():
     try:
