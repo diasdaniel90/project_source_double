@@ -2,9 +2,9 @@ version: '3'
 
 services:
 
-  source_double_db:
-    image: mariadb:10.3
-    env_file: source_double/environment/env
+  # source_double_db:
+  #   image: mariadb:10.3
+  #   env_file: source_double/environment/env
 
   source_double:
     build:
@@ -12,15 +12,16 @@ services:
     image: source_double:devel
     restart: on-failure
     container_name: source_double_container
-    command: gunicorn -w 3 source_double.wsgi:application -b :9001
+    command: make run
+    #command: gunicorn -w 3 source_double.wsgi:application -b :9001
     env_file: source_double/environment/env
     volumes:
       - .:/app
       - static_data:/app/static
     ports:
       - 9001:9001
-    depends_on:
-      - source_double_db
+    # depends_on:
+    #   - source_double_db
 
   ws_daemon:
     build: .
@@ -28,26 +29,26 @@ services:
     restart: on-failure
     command: python3 manage.py start_client_ws
     env_file: source_double/environment/env
-    depends_on:
-      - source_double_db
+  #   # depends_on:
+  #   #   - source_double_db
 
-  telegram_daemon:
-    build: .
-    image: telegram_daemon:devel
-    restart: on-failure
-    command: python3 manage.py start_telegram
-    env_file: source_double/environment/env
-    depends_on:
-      - source_double_db
+  # telegram_daemon:
+  #   build: .
+  #   image: telegram_daemon:devel
+  #   restart: on-failure
+  #   command: python3 manage.py start_telegram
+  #   env_file: source_double/environment/env
+  #   depends_on:
+  #     - source_double_db
 
-  control_bet_daemon:
-    build: .
-    image: control_bet:devel
-    restart: on-failure
-    command: python3 manage.py start_control_bet
-    env_file: source_double/environment/env
-    depends_on:
-      - source_double_db
+  # control_bet_daemon:
+  #   build: .
+  #   image: control_bet:devel
+  #   restart: on-failure
+  #   command: python3 manage.py start_control_bet
+  #   env_file: source_double/environment/env
+  #   depends_on:
+  #     - source_double_db
 
 volumes:
   static_data:

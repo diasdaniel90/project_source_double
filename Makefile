@@ -20,7 +20,13 @@ start_telegram_daemon:
 start_control_bet_daemon:
 	python manage.py start_control_bet
 
-target: server start_telegram_daemon start_control_bet_daemon
+start_go_ws_daemon:
+	./teste
+
+export_env:
+	source source_double/environment/env_export
+
+target: export_env server start_telegram_daemon start_control_bet_daemon start_go_ws_daemon
 
 run:
-	make -i -j3 target
+	make -i -j5 target

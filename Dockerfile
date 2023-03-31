@@ -1,22 +1,13 @@
-FROM python:3.9-alpine
+FROM python:3.9.16-bullseye
 
-RUN mkdir /app
-WORKDIR /app
+WORKDIR /usr/src/app
 
-RUN apk add --update mariadb-dev
-RUN apk add --no-cache \
-            --virtual \
-            .build-deps \
-            python3-dev \
-            build-base \
-            linux-headers \
-            gcc
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-#RUN mkdir /app
-WORKDIR /app
+COPY . .
 
 RUN python3 -m pip install --upgrade cython
-RUN ls
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
