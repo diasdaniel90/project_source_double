@@ -23,10 +23,7 @@ start_control_bet_daemon:
 start_go_ws_daemon:
 	./teste
 
-export_env:
-	source source_double/environment/env_export
-
-target: export_env server start_telegram_daemon start_control_bet_daemon start_go_ws_daemon
+target: server start_telegram_daemon start_control_bet_daemon start_go_ws_daemon
 
 run:
-	make -i -j5 target
+	make  -j4 target
