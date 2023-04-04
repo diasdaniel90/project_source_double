@@ -47,6 +47,7 @@ async def coroutine_task_status_rolling(message_status):
         # await asyncio.gather(task_save_balanceWin)
 
         #print("***********",obj_cache_.list_bets_sinals.vars())
+        print("vai tem que salvar no banco")
         task_bets_sinals = asyncio.create_task(aio_lib.save_list_obj(obj_cache_.list_bets_sinals))
         asyncio.gather(task_bets_sinals)
         
