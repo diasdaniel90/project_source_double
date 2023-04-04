@@ -15,6 +15,7 @@ from api.models import ControlBetResult
 
 async def save_list_obj(lista):
     for item in lista:
+        print("########banco de dados#######")
         print(item.__dict__)
         #teste['id']
         teste = item.__dict__

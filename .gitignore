@@ -147,3 +147,7 @@ nome_do_ambiente_virtual
 source_double/environment/env
 source_double/environment/env_export
 source_double/environment/env
+.venv_source
+nohup.out
+source_double/environment/env
+source_double/environment/env
