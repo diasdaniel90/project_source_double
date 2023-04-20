@@ -5,12 +5,14 @@ from api import aio_lib
 from api.class_async import cache_async
 from api import util
 from api import get_config
+from api.models import ControlBetResult
+
 async def coroutine_task_status_waiting(message_status):
     print("====================INICIO==================================")   
     # task_save_waiting = asyncio.create_task(aio_lib.save(message_status,'result'))
     # asyncio.gather(task_save_waiting)
     print('+++++PRONTO PARA APOSTAR: %s' % (message_status))
-    #await asyncio.sleep(get_config.process_time)
+    await asyncio.sleep(1)
     print("FIM DA ESPERA")
     
     #obj_cache_.convert_sinal_list_to_bet(message_status)
@@ -47,11 +49,20 @@ async def coroutine_task_status_rolling(message_status):
         # await asyncio.gather(task_save_balanceWin)
 
         #print("***********",obj_cache_.list_bets_sinals.vars())
-        print("vai tem que salvar no banco")
-        task_bets_sinals = asyncio.create_task(aio_lib.save_list_obj(obj_cache_.list_bets_sinals))
-        asyncio.gather(task_bets_sinals)
+        for item in obj_cache_.list_bets_sinals:
+            print(item.__dict__)
+            loop_save = asyncio.get_event_loop()
+            create_func = asyncio.to_thread(ControlBetResult.objects.create, **item.__dict__)
+            await loop_save.run_in_executor(None, await create_func)
+            
+            
+            
+            #server_result = ControlBetResult.objects.create(**item.__dict__)
+            #server_result.save()
+        # task_bets_sinals = asyncio.create_task(aio_lib.save_list_obj(obj_cache_.list_bets_sinals))
+        # await asyncio.gather(task_bets_sinals)
         
-        #await aio_lib.save_list_obj(obj_cache_.list_bets_sinals)
+        #aio_lib.save_list_obj(obj_cache_.list_bets_sinals)
         
         obj_cache_.list_bets_sinals.clear()
         obj_cache_.ajust_gale_()

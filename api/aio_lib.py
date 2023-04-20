@@ -14,8 +14,8 @@ from api.models import ControlBetResult
 #         await writer.writerow(dicio)   
 
 async def save_list_obj(lista):
+    print(lista)
     for item in lista:
-        print("########banco de dados#######")
         print(item.__dict__)
         #teste['id']
         teste = item.__dict__
