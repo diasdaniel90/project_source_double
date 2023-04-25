@@ -43,3 +43,15 @@ class UserResult(models.Model):
     amount = models.FloatField(null=False)
     currency_type = models.CharField(max_length=3, null=False, blank=False)
     user = models.CharField(max_length=12, null=False, blank=False)
+
+class GoControlBetResult(models.Model):
+    ID_bet = models.CharField(max_length=12, null=False, blank=False)
+    timestamp = models.FloatField(null=False)
+    timestamp_signal = models.FloatField(null=False)
+    color = models.IntegerField(null=False)
+    source = models.CharField(max_length=35, null=False, blank=False)
+    win = models.BooleanField(null=False)
+    status = models.CharField(max_length=16, null=True, blank=True)
+    gale = models.IntegerField(null=False)
+    amount = models.FloatField(null=False)
+    balanceWin = models.FloatField(null=False)
