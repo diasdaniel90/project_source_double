@@ -12,7 +12,7 @@ bufferSize          = 1024
 # Create a UDP socket at client side
 UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
-serverAddressPortSinals = ("127.0.0.1", 20002)#PORTA SINAIS
+serverAddressPortSinals = ("127.0.0.1", 1234)#PORTA SINAIS
 serverAddressPort_client   = ("127.0.0.1", 20001)#PORTA STATUS DO SERVER NUVEM
 
 def send_cliente(msg):
