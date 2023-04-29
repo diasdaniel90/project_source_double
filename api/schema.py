@@ -1,7 +1,34 @@
 from datetime import datetime
-import graphene 
+import graphene
+import pytz
 from django.conf import settings
-from api.models import ServerResult, UserResult, ControlBetResult
+from api.models import ServerResult, UserResult, ControlBetResult, GoControlBetResult
+
+
+class GoControlBetResultType(graphene.ObjectType):
+    ID_bet = graphene.String()
+    timestamp = graphene.Float()
+    timestamp_signal = graphene.Float()
+    color = graphene.Int()
+    source = graphene.String()
+    win = graphene.Boolean()
+    status = graphene.String()
+    gale = graphene.Int()
+    amount = graphene.Float()
+    balanceWin = graphene.Float()
+    datetime = graphene.DateTime()
+    datetime_signal = graphene.DateTime()
+
+    def resolve_datetime(self, info, **kwargs):
+        return datetime.fromtimestamp(self.timestamp).astimezone(
+                pytz.timezone('America/Sao_Paulo')
+            )
+
+    def resolve_datetime_signal(self, info, **kwargs):
+        return datetime.fromtimestamp(self.timestamp_signal).astimezone(
+                pytz.timezone('America/Sao_Paulo')
+            )
+
 
 class UserResultType(graphene.ObjectType):
     ID_bet = graphene.String()
@@ -12,9 +39,14 @@ class UserResultType(graphene.ObjectType):
     amount = graphene.Float()
     currency_type = graphene.String()
     user = graphene.String()
-    
+    simulations = graphene.List(GoControlBetResultType)
+
+    def resolve_simulations(self, info, **kwargs):
+        return GoControlBetResult.objects.filter(ID_bet=self.ID_bet)
+
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp) 
+
 
 class ControlBetResultType(graphene.ObjectType):
     ID_bet = graphene.String()
@@ -35,7 +67,8 @@ class ControlBetResultType(graphene.ObjectType):
     
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)   
-    
+
+
 class ServerResultType(graphene.ObjectType):
     ID_bet = graphene.String()
     timestamp = graphene.Int()
@@ -54,6 +87,10 @@ class ServerResultType(graphene.ObjectType):
     total_eur_bet = graphene.Int()
     total_retention_eur = graphene.Int()
     user_results = graphene.List(UserResultType)
+    simulations = graphene.List(GoControlBetResultType)
+
+    def resolve_simulations(self, info, **kwargs):
+        return GoControlBetResult.objects.filter(ID_bet=self.ID_bet)
     
     def resolve_user_results(self, info, **kwargs):
         return UserResult.objects.filter(ID_bet=self.ID_bet)
@@ -61,11 +98,51 @@ class ServerResultType(graphene.ObjectType):
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)     
 
+
 class Query:
     version = graphene.String()
     def resolve_version(self, info, **kwargs):
         return settings.VERSION
-    
+
+    go_control_bet_results = graphene.List(
+        GoControlBetResultType,
+        ID_bet=graphene.String(description='Filter by bet id'),
+        ID_bet__in=graphene.List(
+            graphene.String,
+            description='Filter by listed bet ids'
+        ),
+        color=graphene.Int(description='Filter by bet color'),
+        color__in=graphene.List(
+            graphene.Int,
+            description='Filter by bet colors listed'
+        ),
+        source=graphene.String(description='Filter by bet source'),
+        status=graphene.String(description='Filter by bet status'),
+        win=graphene.Boolean(description='Filter by win result'),
+        gale=graphene.Int(
+            description='Filter by bet gale'
+        ),
+        gale__in=graphene.List(
+            graphene.Int,
+            description='Filter by listed gales'
+        ),
+        amount=graphene.Float(description='Filter by amount spent'),
+        amount__lte=graphene.Float(description='Filter by amount lesser or equal inputed value'),
+        amount__gte=graphene.Float(description='Filter by amount spent greater or equal inputed value'),
+        balanceWin=graphene.Float(description='Filter by win balance'),
+        datetime__gte=graphene.DateTime(description='Filter by bet starting datetime'),
+        datetime__lte=graphene.DateTime(description='Filter by bets up to datetime')
+    )
+    def resolve_go_control_bet_results(self, info, **kwargs):
+        dt_gte = kwargs.pop('datetime__gte', None)
+        dt_lte = kwargs.pop('datetime__lte', None)
+        if dt_gte:
+            kwargs['timestamp__gte'] = datetime.timestamp(dt_gte)
+        if dt_lte:
+            kwargs['timestamp__lte'] = datetime.timestamp(dt_lte)
+        return GoControlBetResult.objects.filter(**kwargs)
+
+
     control_bet_result = graphene.List(
         ControlBetResultType,
         ID_bet = graphene.String(),
