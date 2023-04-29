@@ -1,7 +1,34 @@
 from datetime import datetime
-import graphene 
+import graphene
+import pytz
 from django.conf import settings
-from api.models import ServerResult, UserResult, ControlBetResult
+from api.models import ServerResult, UserResult, ControlBetResult, GoControlBetResult
+
+
+class GoControlBetResultType(graphene.ObjectType):
+    ID_bet = graphene.String()
+    timestamp = graphene.Float()
+    timestamp_signal = graphene.Float()
+    color = graphene.Int()
+    source = graphene.String()
+    win = graphene.Boolean()
+    status = graphene.String()
+    gale = graphene.Int()
+    amount = graphene.Float()
+    balanceWin = graphene.Float()
+    datetime = graphene.DateTime()
+    datetime_signal = graphene.DateTime()
+
+    def resolve_datetime(self, info, **kwargs):
+        return datetime.fromtimestamp(self.timestamp).astimezone(
+                pytz.timezone('America/Sao_Paulo')
+            )
+
+    def resolve_datetime_signal(self, info, **kwargs):
+        return datetime.fromtimestamp(self.timestamp_signal).astimezone(
+                pytz.timezone('America/Sao_Paulo')
+            )
+
 
 class UserResultType(graphene.ObjectType):
     ID_bet = graphene.String()
@@ -15,6 +42,7 @@ class UserResultType(graphene.ObjectType):
     
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp) 
+
 
 class ControlBetResultType(graphene.ObjectType):
     ID_bet = graphene.String()
@@ -35,7 +63,8 @@ class ControlBetResultType(graphene.ObjectType):
     
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)   
-    
+
+
 class ServerResultType(graphene.ObjectType):
     ID_bet = graphene.String()
     timestamp = graphene.Int()
@@ -61,11 +90,20 @@ class ServerResultType(graphene.ObjectType):
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)     
 
+
 class Query:
     version = graphene.String()
     def resolve_version(self, info, **kwargs):
         return settings.VERSION
-    
+
+    go_control_bet_results = graphene.List(
+        GoControlBetResultType,
+        # TODO filters
+    )
+    def resolve_go_control_bet_results(self, info, **kwargs):
+        return GoControlBetResult.objects.filter(**kwargs)
+
+
     control_bet_result = graphene.List(
         ControlBetResultType,
         ID_bet = graphene.String(),
