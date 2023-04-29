@@ -39,7 +39,11 @@ class UserResultType(graphene.ObjectType):
     amount = graphene.Float()
     currency_type = graphene.String()
     user = graphene.String()
-    
+    simulations = graphene.List(GoControlBetResultType)
+
+    def resolve_simulations(self, info, **kwargs):
+        return GoControlBetResult.objects.filter(ID_bet=self.ID_bet)
+
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp) 
 
@@ -83,6 +87,10 @@ class ServerResultType(graphene.ObjectType):
     total_eur_bet = graphene.Int()
     total_retention_eur = graphene.Int()
     user_results = graphene.List(UserResultType)
+    simulations = graphene.List(GoControlBetResultType)
+
+    def resolve_simulations(self, info, **kwargs):
+        return GoControlBetResult.objects.filter(ID_bet=self.ID_bet)
     
     def resolve_user_results(self, info, **kwargs):
         return UserResult.objects.filter(ID_bet=self.ID_bet)
