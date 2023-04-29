@@ -98,9 +98,40 @@ class Query:
 
     go_control_bet_results = graphene.List(
         GoControlBetResultType,
-        # TODO filters
+        ID_bet=graphene.String(description='Filter by bet id'),
+        ID_bet__in=graphene.List(
+            graphene.String,
+            description='Filter by listed bet ids'
+        ),
+        color=graphene.Int(description='Filter by bet color'),
+        color__in=graphene.List(
+            graphene.Int,
+            description='Filter by bet colors listed'
+        ),
+        source=graphene.String(description='Filter by bet source'),
+        status=graphene.String(description='Filter by bet status'),
+        win=graphene.Boolean(description='Filter by win result'),
+        gale=graphene.Int(
+            description='Filter by bet gale'
+        ),
+        gale__in=graphene.List(
+            graphene.Int,
+            description='Filter by listed gales'
+        ),
+        amount=graphene.Float(description='Filter by amount spent'),
+        amount__lte=graphene.Float(description='Filter by amount lesser or equal inputed value'),
+        amount__gte=graphene.Float(description='Filter by amount spent greater or equal inputed value'),
+        balanceWin=graphene.Float(description='Filter by win balance'),
+        datetime__gte=graphene.DateTime(description='Filter by bet starting datetime'),
+        datetime__lte=graphene.DateTime(description='Filter by bets up to datetime')
     )
     def resolve_go_control_bet_results(self, info, **kwargs):
+        dt_gte = kwargs.pop('datetime__gte', None)
+        dt_lte = kwargs.pop('datetime__lte', None)
+        if dt_gte:
+            kwargs['timestamp__gte'] = datetime.timestamp(dt_gte)
+        if dt_lte:
+            kwargs['timestamp__lte'] = datetime.timestamp(dt_lte)
         return GoControlBetResult.objects.filter(**kwargs)
 
 
