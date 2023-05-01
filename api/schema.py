@@ -2,7 +2,7 @@ from datetime import datetime
 import graphene
 import pytz
 from django.conf import settings
-from api.models import ServerResult, UserResult, ControlBetResult, GoControlBetResult
+from api.models import ControlBetResult, GoControlBetResult,GoUserResults
 
 
 class GoControlBetResultType(graphene.ObjectType):
@@ -93,7 +93,7 @@ class ServerResultType(graphene.ObjectType):
         return GoControlBetResult.objects.filter(ID_bet=self.ID_bet)
     
     def resolve_user_results(self, info, **kwargs):
-        return UserResult.objects.filter(ID_bet=self.ID_bet)
+        return GoUserResults.objects.filter(ID_bet=self.ID_bet)
 
     def resolve_datetime(self, info, **kwargs):
         return datetime.fromtimestamp(self.timestamp)     
@@ -173,7 +173,7 @@ class Query:
         user = graphene.String(), 
     )
     def resolve_user_result(self, info, **kwargs):
-        return UserResult.objects.filter(**kwargs)
+        return GoUserResults.objects.filter(**kwargs)
     
     server_results = graphene.List(
         ServerResultType,
@@ -208,7 +208,7 @@ class Query:
             kwargs['timestamp__gte'] = datetime.timestamp(dt_gte)
         if dt_lte:
             kwargs['timestamp__lte'] = datetime.timestamp(dt_lte)
-        return ServerResult.objects.filter(**kwargs)
+        return GoUserResults.objects.filter(**kwargs)
     
 
 
