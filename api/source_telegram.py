@@ -75,7 +75,7 @@ with client:
         #print(util.timestemp_to_string(timestamp))
         #print(event.raw_text)
         #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
-        #print(event.raw_text)
+        print(event.raw_text)
         strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
         print(strs)
         timestamp = datetime.timestamp(event.date)
