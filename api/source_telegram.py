@@ -68,6 +68,31 @@ with client:
     print(banner)
     client.start()  
     
+    @client.on(events.NewMessage(chats=source_t_7))
+    async def my_event_handler(event):
+        source=source_t_7
+        print("-------------------------------------------")
+        #print(util.timestemp_to_string(timestamp))
+        #print(event.raw_text)
+        #strs = re.sub(r"[^a-zA-Z0-9: \n]","",event.raw_text)
+        print(event.raw_text)
+        strs = re.sub(r"[^a-zA-Z0-9🔴⚪️ ⚫️\n]","",event.raw_text)
+        print(strs)
+        timestamp = datetime.timestamp(event.date)
+        #print(util.timestemp_to_string(timestamp))
+        if re.search('entre', strs,re.IGNORECASE) or re.search('entrar', strs,re.IGNORECASE):  
+            if re.search('vermelho', strs,re.IGNORECASE):
+                json_send = json.dumps({"type": "real_time",  "time":timestamp, "color": 1, "source": source})
+                print(json_send)
+                util.send_cliente_sinals(json_send)
+            elif re.search('preto', strs,re.IGNORECASE):
+                json_send = json.dumps({"type": "real_time" , "time":timestamp, "color": 2, "source": source})
+                print(json_send)
+                util.send_cliente_sinals(json_send)
+            else:
+                print(strs)
+                print("########not sinal##########")     
+    
     @client.on(events.NewMessage(chats=source_t_1))
     async def my_event_handler(event):
         source=source_t_1
