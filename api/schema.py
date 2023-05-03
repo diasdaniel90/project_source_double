@@ -2,7 +2,7 @@ from datetime import datetime
 import graphene
 import pytz
 from django.conf import settings
-from api.models import ControlBetResult, GoControlBetResult,GoUserResults
+from api.models import ServerResult, GoUserResults, GoControlBetResult
 
 
 class GoControlBetResultType(graphene.ObjectType):
@@ -208,7 +208,7 @@ class Query:
             kwargs['timestamp__gte'] = datetime.timestamp(dt_gte)
         if dt_lte:
             kwargs['timestamp__lte'] = datetime.timestamp(dt_lte)
-        return GoUserResults.objects.filter(**kwargs)
+        return ServerResult.objects.filter(**kwargs)
     
 
 
